@@ -1,0 +1,11 @@
+.list {
+    padding: 20px;
+    display: flex;
+    justify-content: space-between;
+    background-color: blueviolet;
+
+}
+
+h1 {
+    text-align: center;
+}
