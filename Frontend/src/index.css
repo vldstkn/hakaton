@@ -1,4 +1,21 @@
-/*styles for all app*/
-:root {
-
+*{
+    margin: 0;
+    padding: 0;
+}
+a{
+    text-decoration: none;
+}
+#root{
+    padding: 0;
+}
+html, body, #root{
+    width: 100%;
+    height: 100%;
+}
+input{
+    outline: none;
+    border: none;
+}
+button{
+    cursor: pointer;
 }
