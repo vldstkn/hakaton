@@ -7,13 +7,58 @@ import Typography from '@mui/material/Typography';
 import Menu from '@mui/material/Menu';
 import Container from '@mui/material/Container';
 import Avatar from '@mui/material/Avatar';
+import MenuIcon from '@mui/icons-material/Menu';
 import Button from '@mui/material/Button';
 import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
+import { alpha, InputBase } from '@mui/material';
+import SearchIcon from '@mui/icons-material/Search';
+//import for mui theme
+import { styled } from "@mui/material/styles";
 
 const pages = ['Products', 'Pricing', 'Blog'];
 const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
 
+const Search = styled('div')(({ theme }) => ({
+    position: 'relative',
+    borderRadius: theme.shape.borderRadius,
+    backgroundColor: alpha(theme.palette.common.white, 0.15),
+    '&:hover': {
+      backgroundColor: alpha(theme.palette.common.white, 0.25),
+    },
+    marginRight: theme.spacing(2),
+    marginLeft: 0,
+    width: '100%',
+    [theme.breakpoints.up('sm')]: {
+      marginLeft: theme.spacing(3),
+      width: 'auto',
+    },
+  }));
+  
+  const SearchIconWrapper = styled('div')(({ theme }) => ({
+    padding: theme.spacing(0, 2),
+    height: '100%',
+    position: 'absolute',
+    pointerEvents: 'none',
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+  }));
+
+  const StyledInputBase = styled(InputBase)(({ theme }) => ({
+    color: 'inherit',
+    '& .MuiInputBase-input': {
+      padding: theme.spacing(1, 1, 1, 0),
+      // vertical padding + font size from searchIcon
+      paddingLeft: `calc(1em + ${theme.spacing(4)})`,
+      transition: theme.transitions.create('width'),
+      width: '100%',
+      [theme.breakpoints.up('md')]: {
+        width: '20ch',
+      },
+    },
+  }));
+  
 function ResponsiveAppBar() {
   const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(null);
   const [anchorElUser, setAnchorElUser] = React.useState<null | HTMLElement>(null);
@@ -34,7 +79,7 @@ function ResponsiveAppBar() {
   };
 
   return (
-    <AppBar position="static">
+    <AppBar sx={{backgroundColor: 'rgb(255, 80, 101)'}} position="static">
       <Container maxWidth="xl">
         <Toolbar disableGutters>
           {/* <AdbIcon sx={{ display: { xs: 'none', md: 'flex' }, mr: 1 }} /> */}
@@ -49,13 +94,22 @@ function ResponsiveAppBar() {
               fontFamily: 'monospace',
               fontWeight: 700,
               letterSpacing: '.3rem',
-              color: 'inherit',
+              color: 'rgb(64, 1, 64)',
               textDecoration: 'none',
+              fontSize: 50
             }}
           >
-            LOGO
+            EASYMART
           </Typography>
-
+          <Search>
+            <SearchIconWrapper>
+              <SearchIcon />
+            </SearchIconWrapper>
+            <StyledInputBase
+              placeholder="Search…"
+              inputProps={{ 'aria-label': 'search' }}
+            />
+          </Search>
           <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
             <IconButton
               size="large"
@@ -65,7 +119,7 @@ function ResponsiveAppBar() {
               onClick={handleOpenNavMenu}
               color="inherit"
             >
-              {/* <MenuIcon /> */}
+              <MenuIcon />
             </IconButton>
             <Menu
               id="menu-appbar"
@@ -103,7 +157,7 @@ function ResponsiveAppBar() {
               fontFamily: 'monospace',
               fontWeight: 700,
               letterSpacing: '.3rem',
-              color: 'inherit',
+              color: 'rgb(255, 80, 101)',
               textDecoration: 'none',
             }}
           >
