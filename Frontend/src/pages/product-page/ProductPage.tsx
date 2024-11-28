@@ -3,12 +3,7 @@ import './productPage.css'
 import { Button } from '@mui/material';
 import { useState } from 'react';
 
-// ProductPageProps пример параметров компонента. 
-// Для использования ProductPage() меняем на ProductPage(props: ProductPageProps) 
-// и обращаемся к перменной props уже внутри компонента
-// type ProductPageProps = {
-//     productN: number;
-// };
+
 
 export default function ProductPage() {
     //Получение идентификатора товара из url
