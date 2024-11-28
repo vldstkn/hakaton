@@ -1,6 +1,13 @@
+<<<<<<< HEAD
 *{
     margin: 0;
     padding: 0;
+=======
+/*styles for all app*/
+body {
+    margin: 0px;
+    padding: 0px;
+>>>>>>> 1ed0d05f113c90ea02a6f2655fa1e069cc05a205
 }
 a{
     text-decoration: none;

@@ -1,9 +1,13 @@
 import { NavLink } from 'react-router-dom';
-import './productList.css'
+import './MainPage.css'
 import { Card, CardContent } from '@mui/material';
 
-export default function ProductList() {
-  const products = [{productId: 1, productName: 'name 1'},{productId: 2, productName: 'name 2'},{productId: 3, productName: 'name 3'}]
+export default function MainPage() {
+  const products = [
+    {productId: 1, productName: 'name 1'},
+    {productId: 2, productName: 'name 2'},
+    {productId: 3, productName: 'name 3'}
+  ]
 
     return (
       <>
