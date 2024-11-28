@@ -1,4 +1,65 @@
 .productPage {
-    display: block;
-    background-color: blue;
+    display: flex; /* Используем Flexbox для размещения элементов в строку */
+    height: 100vh; /* Задаем высоту на весь экран */
+    width: 100%; /* Убедитесь, что родительский элемент занимает 100% ширины */
+}
+
+.carousel, .productCard {
+    flex: 0 0 50%; /* Каждому элементу отдаем 50% ширины */
+    height: 700px; /* Высота для карусели и карточки */
+    display: flex;
+    margin-top: 50px;
+   /* padding: 50px;  Отступы внутри элементов */
+}
+
+
+.productCard {
+    display: flex; /* Используем Flexbox для карточки продукта */
+    flex-direction: column; /* Располагаем элементы вертикально */
+    /* justify-content: space-between; /* Распределяем пространство между элементами */
+}
+
+.prAbout {
+    margin-bottom: auto; /* Отступ снизу для описания товара */
+    margin-top: 20px;
+}
+
+.prPrice{
+    height: 30;
+    margin-top: auto; /* Перемещаем кнопку вниз */
+}
+.buttonContainer {
+    margin-top: auto; /* Перемещаем кнопку вниз */
+    display: flex; /* Используем Flexbox для кнопок */
+    gap: 10px;
+    
+}
+
+.buttoncart, .buttonbuy {
+    width: 100%; /* Задаем ширину кнопок 100% от родительского контейнера */
+    transition: background-color 0.3s; /* Плавный переход для цвета фона */
+}
+
+.buttoncart {
+    background-color: rgb(192, 254, 254) !important; /* Задаем цвет фона */
+    color: black !important; /* Задаем цвет текста */
+    border: none; /* Убираем границу (по желанию) */
+    padding: 10px 20px; /* Задаем отступы (по желанию) */
+    cursor: pointer; /* Указываем, что это кнопка */
+}
+
+.buttonbuy {
+    background-color: rgb(255, 80, 101) !important; /* Задаем цвет фона */
+    color: black !important; /* Задаем цвет текста */
+    border: none; /* Убираем границу (по желанию) */
+    padding: 10px 20px; /* Задаем отступы (по желанию) */
+    cursor: pointer; /* Указываем, что это кнопка */
+}
+
+.buttoncart:hover {
+    background-color: rgba(192, 254, 254, 0.8); /* Цвет при наведении */
+}
+
+.buttonbuy:hover {
+    background-color: rgba(255, 80, 101, 0.8); /* Цвет при наведении */
 }
