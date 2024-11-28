@@ -1,14 +1,12 @@
 import { useParams } from 'react-router-dom';
 import './productPage.css'
 import { Button, Paper } from '@mui/material';
-import { useState } from 'react';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import CreditCardIcon from '@mui/icons-material/CreditCard';
 
 export default function ProductPage() {
     //Получение идентификатора товара из url
     const { id } = useParams();
-    const [count, setCount] = useState(0)
 
   
 
@@ -16,7 +14,7 @@ export default function ProductPage() {
     <div className="productPage">
     <div className="carousel">
           <img
-                src="/product.jpg"
+                src={`/product_${id}.jpg`}
                 style={{
                     maxWidth: '100%',
                     height:'100%',

@@ -1,11 +1,50 @@
 .list {
-    padding: 20px;
+    
+    padding: 40px;
     display: flex;
-    justify-content: space-between;
-    background-color: blueviolet;
-
+    flex-wrap:wrap;
+    justify-content: start;
+    gap: 1em;
+    background-color: white;
 }
 
 h1 {
     text-align: center;
+    white-space: nowrap;
+}
+.description {
+    font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    color:grey;
+    text-align: left;
+    justify-content: start;
+    font-size:small;
+    padding-bottom: 15px;
+}
+.product {
+    width: 290px;
+    height: 510px;
+}
+.product_name {
+    font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    color:black;
+    text-align: center;
+    white-space: nowrap;
+}
+.img_product{
+    text-align: center;
+    width: 250px;
+    height: 250px;
+}
+.rating-read{
+    text-align: left;
+}
+.main_button{
+    padding-top: 10px;
+    padding-bottom: 10px;
+    text-align: center;
+}
+
+.price:after {
+    font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+	content: ' \20BD';
 }
