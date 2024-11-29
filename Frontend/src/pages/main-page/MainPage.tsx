@@ -1,9 +1,10 @@
 import { NavLink } from 'react-router-dom';
 import './MainPage.css'
-import { Button } from '@mui/material';
+import { Box, Button, Checkbox } from '@mui/material';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import { Card, CardContent, Rating, ToggleButton, ToggleButtonGroup } from '@mui/material';
 import { useState } from 'react';
+import { Favorite, FavoriteBorder } from '@mui/icons-material';
 
 export default function MainPage() {
   const [rec1, set1] = useState(true)
@@ -35,7 +36,31 @@ export default function MainPage() {
             <Card className='product' key={product.productId}> 
               <NavLink to={`/product/${product.productId}`}>
               <CardContent className="cardContent">
-              <img className='img_product' src={`/product_${product.productId}.jpg`} />  
+              <Box sx={{ position: 'relative'}}>
+              <img className='img_product' src={`/product_${product.productId}.jpg`} />              
+              <Checkbox
+                icon={<FavoriteBorder />}
+                checkedIcon={<Favorite />}
+                onClick={(event) => event.stopPropagation()} 
+                sx={{
+                  position: 'absolute',
+                  backgroundColor: 'white',
+                  top: '10px',
+                  right: '10px',
+                  color: 'gray', 
+                  '&.Mui-checked': {
+                    color: 'red', 
+                  },
+                  '&:hover': {
+                    backgroundColor: 'white', 
+                    opacity: 1,
+                    transform: 'scale(1.2)', 
+                  },
+                  transition: 'transform 0.3s', 
+                  zIndex: 1,
+                }}
+              />
+              </Box>
               <h2 className='price'>{product.price}</h2>      
               <h2 className='product_name'>{product.productName}</h2>
               <div className='rating-read'>
@@ -44,20 +69,16 @@ export default function MainPage() {
               <h2 className='reviews'>({product.reviews})</h2>
               </div>
               <Button className="buttonbuy"
-            variant="contained"
-            endIcon={<ShoppingCartIcon />}>
-            Доставим {product.date}
-      </Button>
-             </CardContent>
-              
-
+              variant="contained"
+              endIcon={<ShoppingCartIcon />}>
+              Доставим {product.date}
+              </Button>
+              </CardContent>
               </NavLink>  
-              </Card>
-          
-          )}
+            </Card>         
+            )}
           </div>
-          </div>
-       </>
-      
+        </div>
+       </>     
     )
   }
