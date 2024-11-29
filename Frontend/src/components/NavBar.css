@@ -1,0 +1,7 @@
+.SearchField{
+    width:max-content;
+}
+.AppBar{
+    background-color:rgb(255, 80, 101) !important;
+    justify-content: space-between;
+}
