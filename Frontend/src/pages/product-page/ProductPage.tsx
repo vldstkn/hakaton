@@ -7,8 +7,14 @@ import CreditCardIcon from '@mui/icons-material/CreditCard';
 export default function ProductPage() {
     //Получение идентификатора товара из url
     const { id } = useParams();
-
+    const elems = [
+      {productId: 1, productName: 'РуФон 16 Про Макс', stars: 5, price: `16500`,reviews: '12' },
+      {productId: 2, productName: 'Кепка ободранная', stars: 4.6, price: '900',reviews: '12'},
+      {productId: 3, productName: 'Кончилось', stars: 2, price: '4444',reviews: '12'},
   
+    ]
+
+    const elem = elems.find(x=>x.productId === Number(id))!;
 
     return (
     <div className="productPage">
@@ -25,7 +31,7 @@ export default function ProductPage() {
             />
       </div>
     <div className="productCard">
-      <h1>Название товара</h1>
+    <h1 className='product_name'>{elem.productName}</h1>
       <div className="prAbout"> <h3>Описание товара</h3></div>  
       <div className="prPriceButton">
       <div className="prPrice"><h3>Прайс</h3></div>
