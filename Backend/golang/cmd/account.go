@@ -19,9 +19,9 @@ func main() {
 		DB:     database,
 		Logger: logger,
 	})
-	logger.Info("Server run", slog.String("Address", config.AccountAddress))
+	logger.Info("Server Account run", slog.String("Address", config.AccountAddress))
 	server := http.Server{
-		Addr:    config.AccountAddress,
+		Addr:    config.ProductAddress,
 		Handler: app.Run(),
 	}
 	server.ListenAndServe()

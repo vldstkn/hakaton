@@ -6,11 +6,11 @@ import (
 )
 
 type Config struct {
-	ApiAddress     string
-	AccountAddress string
-	ProductAddress string
-	Dsn            string
-	JWTSecret      string
+	ApiAddress      string
+	AccountAddress  string
+	ProductsAddress string
+	Dsn             string
+	JWTSecret       string
 }
 
 func LoadConfig() *Config {
@@ -20,10 +20,10 @@ func LoadConfig() *Config {
 	}
 
 	return &Config{
-		Dsn:            os.Getenv("DSN"),
-		ApiAddress:     os.Getenv("ApiAddress"),
-		AccountAddress: os.Getenv("AccountAddress"),
-		ProductAddress: os.Getenv("ProductAddress"),
-		JWTSecret:      os.Getenv("JWTSecret"),
+		Dsn:             os.Getenv("DSN"),
+		ApiAddress:      os.Getenv("ApiAddress"),
+		AccountAddress:  os.Getenv("AccountAddress"),
+		ProductsAddress: os.Getenv("ProductsAddress"),
+		JWTSecret:       os.Getenv("JWTSecret"),
 	}
 }
