@@ -3,27 +3,20 @@ import AppBar from '@mui/material/AppBar';
 import './NavBar.css'
 import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
-import IconButton from '@mui/material/IconButton';
 import Typography from '@mui/material/Typography';
-import Menu from '@mui/material/Menu';
 import Container from '@mui/material/Container';
-import Avatar from '@mui/material/Avatar';
-import MenuIcon from '@mui/icons-material/Menu';
 import Button from '@mui/material/Button';
-import Tooltip from '@mui/material/Tooltip';
-import MenuItem from '@mui/material/MenuItem';
 import PersonIcon from '@mui/icons-material/Person';
 import { alpha, InputBase } from '@mui/material';
 import SearchIcon from '@mui/icons-material/Search';
 import FavoriteIcon from '@mui/icons-material/Favorite';
-import LocalShippingIcon from '@mui/icons-material/LocalShipping';
 
 //import for mui theme
 import { styled } from "@mui/material/styles";
 
 
 const pages = [ 
-  {pageName:'Профиль', IconName: PersonIcon, url: '/favorites'},
+  {pageName:'Профиль', IconName: PersonIcon, url: '/auth'},
   {pageName:'Избранное', IconName: FavoriteIcon, url: '/favorites'},
 ]
 

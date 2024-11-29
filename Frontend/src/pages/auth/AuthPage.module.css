@@ -8,6 +8,7 @@
 }
 .title{
     font-size: 30px;
+    color: rgb(64, 1, 64) !important;
 }
 
 .form-wrap{
@@ -15,11 +16,11 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    background: rgb(56, 56, 56);
+    background: rgb(255, 80, 101);
     border-radius: 10px;
     padding: 20px;
     gap: 20px;
-    color: white;
+    color: rgb(64, 1, 64) !important;
     width: 30%;
     height: 40%;
     max-height: 400px;
@@ -38,8 +39,8 @@
 
 .input{
     padding: 7px 5px;
-    color: white;
-    background: rgb(139, 139, 139);
+    color: rgb(64, 1, 64) !important;
+    background: rgb(192, 254, 254);;
     border-radius: 5px;
     outline: none;
     border: none;
@@ -48,7 +49,7 @@
 }
 
 .input::placeholder{
-    color: white;
+    color: rgb(64, 1, 64);
     font-size: 16px;
 }
 .button{
@@ -56,9 +57,9 @@
     width: 60%;
     border-radius: 5px;
     text-transform: capitalize;
-    background: rgb(139, 139, 139);
+    background: rgb(192, 254, 254);
     border: none;
-    color: white;
+    color: rgb(64, 1, 64);
     font-weight: 600;
     font-size: 18px;
 }
@@ -66,7 +67,7 @@
 .btn-set-type{
     text-transform: capitalize;
     background: transparent;
-    color: white;
+    color: rgb(64, 1, 64);
     border: none;
     align-self: flex-end;
 }
