@@ -21,8 +21,11 @@ func main() {
 	})
 	logger.Info("Server Products run", slog.String("Address", config.ProductsAddress))
 	server := http.Server{
-		Addr:    config.AccountAddress,
+		Addr:    config.ProductsAddress,
 		Handler: app.Run(),
 	}
-	server.ListenAndServe()
+	err := server.ListenAndServe()
+	if err != nil {
+		panic(err)
+	}
 }

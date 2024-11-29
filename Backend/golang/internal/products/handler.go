@@ -34,7 +34,6 @@ func NewHandler(router *chi.Mux, deps *HandlerDeps) {
 	router.Route("/products", func(router chi.Router) {
 		router.Post("/add-multiple", handler.AddMultiple())
 	})
-	_ = handler
 }
 
 func (handler *Handler) AddMultiple() http.HandlerFunc {
