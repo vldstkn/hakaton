@@ -8,9 +8,9 @@ export default function ProductPage() {
     //Получение идентификатора товара из url
     const { id } = useParams();
     const elems = [
-      {productId: 1, productName: 'РуФон 16 Про Макс', stars: 5, price: `16500`,reviews: '12' },
-      {productId: 2, productName: 'Кепка ободранная', stars: 4.6, price: '900',reviews: '12'},
-      {productId: 3, productName: 'Кончилось', stars: 2, price: '4444',reviews: '12'},
+      {productId: 1, productName: 'РуФон 16 Про Макс', stars: 5, price: `16500`,reviews: '12', favorite: 'false' },
+      {productId: 2, productName: 'Кепка ободранная', stars: 4.6, price: '900',reviews: '12', favorite: 'false'},
+      {productId: 3, productName: 'Кончилось', stars: 2, price: '4444',reviews: '12', favorite: 'false'},
   
     ]
 

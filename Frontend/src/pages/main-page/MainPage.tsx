@@ -36,7 +36,7 @@ export default function MainPage() {
               <NavLink to={`/product/${product.productId}`}>
               <CardContent className="cardContent">
               <img className='img_product' src={`/product_${product.productId}.jpg`} />  
-              <h2 className='price'>{product.price}</h2>      
+              <h2><span className='price'>{product.price} </span> <img className='logo' src="/public/wblogo.jpg" alt="" /> </h2>    
               <h2 className='product_name'>{product.productName}</h2>
               <div className='rating-read'>
               <h2 className='rating-value' >{product.stars.toFixed(1)}</h2>
@@ -49,8 +49,6 @@ export default function MainPage() {
             Доставим {product.date}
       </Button>
              </CardContent>
-              
-
               </NavLink>  
               </Card>
           
