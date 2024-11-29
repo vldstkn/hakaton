@@ -9,9 +9,9 @@ export default function MainPage() {
   const [rec1, set1] = useState(true)
   const [rec2, set2] = useState(false)
   const productsrec = [
-    {productId: 1, productName: 'РуФон 16 Про Макс', stars: 5, price: `16500`,reviews: '12', date: '12 Декабря' },
+    {productId: 1, productName: 'РуФон 16 Про Макс', stars: 5.0, price: `16500`,reviews: '12', date: '12 Декабря' },
     {productId: 2, productName: 'Кепка ободранная', stars: 4.6, price: '900',reviews: '12',date: '12 Декабря' },
-    {productId: 3, productName: 'Кончилось', stars: 2, price: '4444',reviews: '12',date: '12 Декабря' },
+    {productId: 3, productName: 'Кончилось', stars: 2.0, price: '4444',reviews: '12',date: '12 Декабря' },
 
   ]
   const productsrand = [
@@ -39,6 +39,7 @@ export default function MainPage() {
               <h2 className='price'>{product.price}</h2>      
               <h2 className='product_name'>{product.productName}</h2>
               <div className='rating-read'>
+              <h2 className='rating-value' >{product.stars.toFixed(1)}</h2>
               <Rating defaultValue={product.stars} precision={0.1} readOnly/>
               <h2 className='reviews'>({product.reviews})</h2>
               </div>
