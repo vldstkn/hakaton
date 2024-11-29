@@ -1,8 +1,8 @@
 import { useParams } from 'react-router-dom';
 import './productPage.css'
 import { Button, Paper } from '@mui/material';
-import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import CreditCardIcon from '@mui/icons-material/CreditCard';
+import FavoriteIcon from '@mui/icons-material/Favorite';
 
 export default function ProductPage() {
     //Получение идентификатора товара из url
@@ -43,8 +43,8 @@ export default function ProductPage() {
       </Button>
       <Button className="buttoncart"
             variant="contained"
-            endIcon={<ShoppingCartIcon />}>
-            Добавить в корзину
+            endIcon={<FavoriteIcon />}>
+            Добавить в избранное
       </Button>
       </div>
       </div>
