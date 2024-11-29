@@ -1,6 +1,6 @@
 import * as React from 'react';
 import AppBar from '@mui/material/AppBar';
-
+import './NavBar.css'
 import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
 import IconButton from '@mui/material/IconButton';
@@ -20,12 +20,13 @@ import LocalShippingIcon from '@mui/icons-material/LocalShipping';
 
 //import for mui theme
 import { styled } from "@mui/material/styles";
+import { Margin } from '@mui/icons-material';
 
 
 const pages = [
-  {pageName:'Заказы', IconName: LocalShippingIcon}, 
-  {pageName:'Корзина', IconName: ShoppingCartIcon},
-  {pageName:'Избранное', IconName: FavoriteIcon},
+  {pageName:'Заказы', IconName: LocalShippingIcon, url: '/favorites'}, 
+  {pageName:'Корзина', IconName: ShoppingCartIcon, url: '/favorites'},
+  {pageName:'Избранное', IconName: FavoriteIcon, url: '/favorites'},
 
 ]
 const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
@@ -142,9 +143,12 @@ function ResponsiveAppBar() {
           </Typography>
           <Box sx={{ flexGrow: 2, display: { xs: '2', md: 'flex' } }}>
             {pages.map((page) => (
-              <Button startIcon={<page.IconName/>} 
+              <Button className='navbarButton' href={page.url} startIcon={<page.IconName/>} 
                 onClick={handleCloseNavMenu}
-                sx={{ my: 2, color: 'white', display: 'block', fontSize:'12px' }}
+                sx={{ my: 2, color: 'white',  fontSize:'14px',    display: 'flex', 
+                  flexDirection: 'column', 
+                  alignItems: 'center' 
+              }}
               > {page.pageName}
               </Button>
             ))}
