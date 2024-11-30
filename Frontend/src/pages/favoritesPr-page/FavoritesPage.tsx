@@ -67,7 +67,7 @@ export default function FavoritesPage() {
               variant="contained"
               endIcon={<ShoppingCart/>}
               >
-              Доставим{product.date} 
+              Доставим {product.date} 
               </Button>
                
              </CardContent>
