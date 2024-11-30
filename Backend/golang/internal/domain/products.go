@@ -13,5 +13,5 @@ type Product struct {
 	CatId         int             `json:"cat_id" db:"cat_id"  validate:"required"`
 	Name          string          `json:"name" db:"name"  validate:"required"`
 	Description   string          `json:"description" db:"description"  validate:"required"`
-	Embedding     pgvector.Vector `json:"embedding" db:"embedding"`
+	Embedding     pgvector.Vector `json:"embedding,omitempty" db:"embedding"`
 }

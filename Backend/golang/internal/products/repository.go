@@ -36,3 +36,42 @@ func (repo *Repository) AddMultiple(products []domain.Product) error {
 	_, err := repo.DB.Exec(query, valueArgs...)
 	return err
 }
+
+func (repo *Repository) GetRecom(id, catId int) ([]domain.Product, error) {
+	var products []domain.Product
+	err := repo.DB.Select(&products,
+		`SELECT p.id, p.created_at, p.updated_at, p.price, p.rating, p.rating, 
+       						 p.number_reviews, p.link, p.cat_id, p.name, p.description
+						FROM products p
+						CROSS JOIN (
+						    SELECT embedding
+						    FROM products
+						    WHERE id = $1
+						) tp
+						WHERE p.id != $1 AND p.cat_id = $2
+						ORDER BY p.embedding <=> tp.embedding ASC, p.price DESC, p.rating ASC
+						LIMIT 10`, id, catId)
+	if err != nil {
+		return []domain.Product{}, err
+	}
+	return products, nil
+}
+
+func (repo *Repository) GetAll() []domain.Product {
+	var products []domain.Product
+	err := repo.DB.Select(&products, `SELECT p.id, p.created_at, p.updated_at, p.price, p.rating, p.rating, 
+       						 p.number_reviews, p.link, p.cat_id, p.name, p.description FROM products p LIMIT $1`, 50)
+	if err != nil {
+		return []domain.Product{}
+	}
+	return products
+}
+
+func (repo *Repository) GetById(id int) *domain.Product {
+	var product domain.Product
+	err := repo.DB.Get(&product, "SELECT * FROM products WHERE id=$1", id)
+	if err != nil {
+		return nil
+	}
+	return &product
+}

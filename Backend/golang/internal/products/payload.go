@@ -30,3 +30,7 @@ type GetRecomRequest struct {
 type GetRecomResponse struct {
 	Products []domain.Product `json:"products"`
 }
+
+type GetAllResponse struct {
+	Products []domain.Product `json:"products"`
+}

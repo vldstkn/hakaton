@@ -40,6 +40,7 @@ func NewHandler(router *chi.Mux, deps *HandlerDeps) {
 	router.Route("/products", func(router chi.Router) {
 		router.Post("/add-multiple", handler.AddMultiple())
 		router.Post("/recom", handler.GetRecommendation())
+		router.Post("/all", handler.GetAll())
 	})
 }
 
@@ -138,7 +139,17 @@ func (handler *Handler) GetRecommendation() http.HandlerFunc {
 			http.Error(w, http.StatusText(http.StatusBadRequest), http.StatusBadRequest)
 			return
 		}
-		_ = body
+
+		products, err := handler.Service.GetRecom(body.Id, body.CatId)
+		if err != nil {
+			handler.Logger.Error("Service.GetRecom", slog.String("err", err.Error()))
+			http.Error(w, http.StatusText(http.StatusInternalServerError), http.StatusInternalServerError)
+			return
+		}
+
+		res.Json(w, GetRecomResponse{
+			Products: products,
+		}, http.StatusOK)
 	}
 }
 
@@ -151,5 +162,19 @@ func (handler *Handler) GetById() http.HandlerFunc {
 func (handler *Handler) GetByUserId() http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
 
+	}
+}
+
+func (handler *Handler) GetAll() http.HandlerFunc {
+	return func(w http.ResponseWriter, r *http.Request) {
+		products := handler.Service.GetAll()
+		if products == nil {
+			handler.Logger.Error("Service.All", slog.String("err", "Service.All"))
+			http.Error(w, http.StatusText(http.StatusInternalServerError), http.StatusInternalServerError)
+			return
+		}
+		res.Json(w, GetAllResponse{
+			Products: products,
+		}, http.StatusOK)
 	}
 }

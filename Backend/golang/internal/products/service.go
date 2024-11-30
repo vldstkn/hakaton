@@ -1,6 +1,7 @@
 package products
 
 import (
+	"errors"
 	"github.com/pgvector/pgvector-go"
 	"hakaton/internal/di"
 	"hakaton/internal/domain"
@@ -40,4 +41,18 @@ func (service *Service) AddMultiple(products []domain.Product, vectors [][]float
 
 	err := service.Repository.AddMultiple(productsWithVectors)
 	return err
+}
+
+func (service *Service) GetRecom(id, cat_id int) ([]domain.Product, error) {
+	product := service.Repository.GetById(id)
+	if product == nil {
+		return []domain.Product{}, errors.New("product not exists")
+	}
+	products, err := service.Repository.GetRecom(id, cat_id)
+	return products, err
+}
+
+func (service *Service) GetAll() []domain.Product {
+	products := service.Repository.GetAll()
+	return products
 }
