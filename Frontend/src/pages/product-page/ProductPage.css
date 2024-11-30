@@ -1,6 +1,6 @@
 .productPage {
     display: flex; 
-    height: 100vh; 
+    height: 800px; 
     width: 100%; 
 }
 
@@ -14,18 +14,20 @@
 
 .productCard {
     display: flex; 
-    flex-direction: column; /* Располагаем элементы вертикально */
+    flex-direction: column; 
 }
-
+.title_name {
+    display: flex; /* Используем flexbox для размещения элементов в строку */
+    align-items: center; /* Центрируем элементы по вертикали */
+    gap: 40px;
+    height: 40px;
+    font-size: large !important;
+    margin: 0%;
+}
 .prAbout {
     margin-bottom: auto; 
-    margin-top: 20px;
 }
 
-.prPrice{
-    height: 30;
-    margin-top: auto; 
-}
 .buttonContainer {
     margin-top: auto;
     display: flex;
@@ -60,4 +62,38 @@
 
 .buttonbuy:hover {
     background-color: rgba(255, 80, 101, 0.8); 
+}
+
+.rating-value{
+    color: #2f2e2e;
+    font-size: 20px;
+}
+
+.star-icon{
+    color: #faaf00;
+}
+
+.reviews{
+    color:darkgrey;
+}
+
+.product_name , .prPrice , .prAbout, .reviews, .rating-value {
+    font-family: YS Text, Helvetica, Arial, sans-serif;
+}
+
+.prPrice{
+    color: rgb(255, 80, 101);
+}
+.prPrice:after {
+    content: ' \20BD'
+}
+
+.description{
+    padding-left: 0%;
+    color: darkgray;
+}
+
+.about{
+    font-size: 20px;
+    padding-left: 0%;
 }
