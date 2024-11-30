@@ -1,7 +1,6 @@
 package products
 
 import (
-	"bytes"
 	"fmt"
 	"hakaton/internal/domain"
 	"hakaton/pkg/db"
@@ -19,7 +18,6 @@ func NewRepository(database *db.DB) *Repository {
 }
 
 func (repo *Repository) AddMultiple(products []domain.Product) error {
-	fmt.Sprintln(products)
 	var valueStrings []string
 	var valueArgs []interface{}
 
@@ -37,17 +35,4 @@ func (repo *Repository) AddMultiple(products []domain.Product) error {
 
 	_, err := repo.DB.Exec(query, valueArgs...)
 	return err
-}
-
-func vectorToString(vector []float32) string {
-	var buf bytes.Buffer
-	buf.WriteString("[")
-	for i, v := range vector {
-		if i > 0 {
-			buf.WriteString(",")
-		}
-		buf.WriteString(fmt.Sprintf("%f", v))
-	}
-	buf.WriteString("]")
-	return buf.String()
 }

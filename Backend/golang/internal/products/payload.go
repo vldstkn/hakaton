@@ -10,3 +10,11 @@ type AddMultiplyResponse struct {
 	IsSuccess bool   `json:"is_success"`
 	Error     string `json:"error"`
 }
+
+type GetVectorsRequest struct {
+	Products []domain.Product `json:"products"`
+}
+
+type GetVectorsResponse struct {
+	Vectors [][]float32 `json:"vectors"`
+}

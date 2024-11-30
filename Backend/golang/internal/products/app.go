@@ -5,12 +5,15 @@ import (
 	configs "hakaton/internal/config"
 	"hakaton/pkg/db"
 	"log/slog"
+	"net/http"
+	"time"
 )
 
 type App struct {
-	DB     *db.DB
-	Config *configs.Config
-	Logger *slog.Logger
+	DB       *db.DB
+	Config   *configs.Config
+	Logger   *slog.Logger
+	MLClient *http.Client
 }
 
 type AppDeps struct {
@@ -24,6 +27,9 @@ func NewApp(deps AppDeps) *App {
 		DB:     deps.DB,
 		Config: deps.Config,
 		Logger: deps.Logger,
+		MLClient: &http.Client{
+			Timeout: 10 * time.Second,
+		},
 	}
 }
 
@@ -34,9 +40,10 @@ func (app *App) Run() *chi.Mux {
 		Repository: repository,
 	})
 	NewHandler(router, &HandlerDeps{
-		Service: service,
-		Config:  app.Config,
-		Logger:  app.Logger,
+		Service:  service,
+		Config:   app.Config,
+		Logger:   app.Logger,
+		MLClient: app.MLClient,
 	})
 
 	return router
