@@ -5,3 +5,7 @@
     background-color:rgb(255, 80, 101) !important;
     justify-content: space-between;
 }
+
+.MuiButton-icon {
+    margin: 0 !important;
+}

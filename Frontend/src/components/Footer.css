@@ -1,17 +1,88 @@
 /* Footer.css */
 .footer {
     position: relative; 
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); /* Тень под линией */
-    background-color: rgb(180, 159, 178); 
-    padding: 20px; 
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 1); /* Тень под линией */
+    padding: 1px; 
     text-align: center; 
     margin-top: auto;
     min-width: auto;
+    left:0px;
+    bottom:0px;
 }
 
 
 .container {
     display: flex;
     flex-direction: column;
-    min-height: 20vh; 
+    font-size: x-small;
+    font-family: monospace, monospace;
+}
+.gridContainer{
+    font-size: small;
+    font-family: monospace, monospace; 
+    display:grid;
+    grid-template-columns: 370px 500px 600px;
+    grid-template-rows: 150px;
+    gap: 5px;
+}
+.gridItem {
+    
+    box-sizing: border-box;
+    text-align:left;
+    font-size: 1.1em;
+    padding: 1.5em;
+    color: darkgray;
+    justify-content: left;
+    border-right:black;
+}
+.gridItem3 {
+    font-size: 1.1em;
+    box-sizing: border-box;
+    text-align:left;
+    padding-left: 20%;
+    color: black;
+    justify-content: left;
+    border-right:black;
+}
+a {
+    outline: none;
+    text-decoration: none;
+    padding: 2px 1px 0 15px;
+    justify-content: center;
+    
+}
+
+a:link {
+    color: black;
+  }
+  
+a:visited {
+    color: black;
+}
+  
+a:active {
+    color: black;
+}
+
+h4{
+    padding-left: 17px;
+    justify-content: left;
+}
+h3{
+    padding-left: 17px;
+    justify-content: left;
+}
+hr{
+    color:black;
+}
+button{
+    background-color: transparent;
+    border: none;
+}
+.copyright{
+    font-family: monospace, monospace;
+}
+.imgF{
+    width: 40px;
+    height: 40px;
 }
