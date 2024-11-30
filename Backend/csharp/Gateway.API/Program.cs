@@ -13,6 +13,16 @@ builder.Services.AddTransient<IAccountProvider, AccountProvider>();
 builder.Services.AddTransient<IProductProvider, ProductProvider>();
 builder.Services.AddTransient<IParserProvider, ParserProvider>();
 
+var corsPolicy = "CorsPolicy";
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy(corsPolicy,
+        builder => builder.AllowAnyOrigin()
+        .AllowAnyMethod()
+        .AllowAnyHeader()
+        );
+});
+
 var app = builder.Build();
 
 if (app.Environment.IsDevelopment())
@@ -20,6 +30,8 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
+
+app.UseCors(corsPolicy);
 
 app.UseHttpsRedirection();
 
