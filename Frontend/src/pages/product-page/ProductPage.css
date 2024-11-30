@@ -77,8 +77,8 @@
     color:darkgrey;
 }
 
-.product_name , .prPrice , .prAbout {
-    font-family: Hauss, Segoe UI, -apple-system, Roboto, Helvetica Neue, Noto Sans, Arial, sans-serif, Apple Color Emoji, Segoe UI Emoji, Segoe UI Symbol, Noto Color Emoji;
+.product_name , .prPrice , .prAbout, .reviews, .rating-value {
+    font-family: YS Text, Helvetica, Arial, sans-serif;
 }
 
 .prPrice{
@@ -86,4 +86,14 @@
 }
 .prPrice:after {
     content: ' \20BD'
+}
+
+.description{
+    padding-left: 0%;
+    color: darkgray;
+}
+
+.about{
+    font-size: 20px;
+    padding-left: 0%;
 }

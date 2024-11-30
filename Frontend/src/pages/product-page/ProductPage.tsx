@@ -9,9 +9,9 @@ export default function ProductPage() {
     //Получение идентификатора товара из url
     const { id } = useParams();
     const elems = [
-      {productId: 1, productName: 'РуФон 16 Про Макс', stars: 5, price: `16500`,reviews: '12', favorite: 'false' },
-      {productId: 2, productName: 'Кепка ободранная', stars: 4.6, price: '900',reviews: '12', favorite: 'false'},
-      {productId: 3, productName: 'Кончилось', stars: 2, price: '4444',reviews: '12', favorite: 'false'},
+      {productId: 1, productName: 'РуФон 16 Про Макс', stars: 5, price: `16500`,reviews: '12', favorite: 'false' ,description: 'Функциональный аэрогриль КТ-2250 может использоваться как аэрогриль, аэрофритюрница, а также как духовка. Позволяет готовить несколько блюд одновременно с'},
+      {productId: 2, productName: 'Кепка ободранная', stars: 4.6, price: '900',reviews: '12', favorite: 'false',description: 'Функциональный аэрогриль КТ-2250 может использоваться как аэрогриль, аэрофритюрница, а также как духовка. Позволяет готовить несколько блюд одновременно с'},
+      {productId: 3, productName: 'Кончилось', stars: 2, price: '4444',reviews: '12', favorite: 'false',description: 'Функциональный аэрогриль КТ-2250 может использоваться как аэрогриль, аэрофритюрница, а также как духовка. Позволяет готовить несколько блюд одновременно с'},
   
     ]
 
@@ -38,7 +38,10 @@ export default function ProductPage() {
               <h2 className='rating-value' >{elem.stars.toFixed(1)}</h2>
               <h2 className='reviews'>({elem.reviews})</h2>
               </div>
-      <div className="prAbout"> <h3>Описание товара</h3></div>  
+      <div className="prAbout">
+         <h3 className="about">Описание</h3>
+         <h4 className="description">{elem.description}</h4>
+      </div>  
       <div className="prPriceButton">
       <div className="buttonContainer">
         <Button className="buttonbuy"
