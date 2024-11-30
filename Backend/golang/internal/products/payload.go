@@ -7,5 +7,6 @@ type AddMultiplyRequest struct {
 }
 
 type AddMultiplyResponse struct {
-	Ids []int
+	IsSuccess bool   `json:"is_success"`
+	Error     string `json:"error"`
 }

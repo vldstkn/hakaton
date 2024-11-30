@@ -6,6 +6,7 @@ import (
 	"hakaton/internal/di"
 	"hakaton/pkg/db"
 	"hakaton/pkg/req"
+	"hakaton/pkg/res"
 	"log/slog"
 	"net/http"
 )
@@ -44,10 +45,28 @@ func (handler *Handler) AddMultiple() http.HandlerFunc {
 			http.Error(w, http.StatusText(http.StatusBadRequest), http.StatusBadRequest)
 			return
 		}
-		err = handler.Service.AddMultiple(body.Products)
+		vectors := make([][]float32, 3)
+		if len(vectors) != len(body.Products) {
+			handler.Logger.Error("AddMultiple error len", slog.String("err", "vector and products have different lengths"))
+			res.Json(w, AddMultiplyResponse{
+				IsSuccess: false,
+				Error:     "vector and products have different lengths",
+			}, http.StatusBadRequest)
+			return
+		}
+		err = handler.Service.AddMultiple(body.Products, vectors)
 		if err != nil {
 			handler.Logger.Error("AddMultiple Service.AddMultiple", slog.String("err", err.Error()))
+			res.Json(w, AddMultiplyResponse{
+				IsSuccess: false,
+				Error:     err.Error(),
+			}, http.StatusBadRequest)
+			return
 		}
+		res.Json(w, AddMultiplyResponse{
+			IsSuccess: true,
+			Error:     "",
+		}, http.StatusCreated)
 	}
 }
 

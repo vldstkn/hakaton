@@ -1,0 +1,33 @@
+/* Footer.css */
+.footer {
+    position: relative; 
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); /* Тень под линией */
+    background-color: rgb(180, 159, 178); 
+    padding: 20px; 
+    text-align: center; 
+    margin-top: auto;
+    min-width: auto;
+}
+
+
+.container {
+    display: flex;
+    flex-direction: column;
+    min-height: 20vh; 
+    font-family: monospace, monospace;
+}
+.footGrid{
+    font-family: monospace, monospace; 
+    display: grid;
+    grid-template-columns: 300px 300px;
+    grid-template-rows: 200px 200px;
+    gap: 5px;
+}
+.imgVk{
+    width: 20px;
+    height: 20px;
+}
+.srcVk{
+    display: flex;
+    justify-content: center;
+}
