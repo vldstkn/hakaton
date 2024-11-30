@@ -1,6 +1,7 @@
 package products
 
 import (
+	"github.com/pgvector/pgvector-go"
 	"hakaton/internal/di"
 	"hakaton/internal/domain"
 )
@@ -19,7 +20,28 @@ func NewService(deps *ServiceDeps) *Service {
 	}
 }
 
-func (service *Service) AddMultiple(products []domain.Product) error {
-	err := service.Repository.AddMultiple(products)
+func (service *Service) AddMultiple(products []domain.Product, vectors [][]float32) error {
+	var productsWithVectors []domain.Product
+
+	vectors[0] = make([]float32, 312)
+	vectors[1] = make([]float32, 312)
+	vectors[2] = make([]float32, 312)
+
+	for i, vector := range vectors {
+		productsWithVectors = append(productsWithVectors, domain.Product{
+			Id:            products[i].Id,
+			CreatedAt:     products[i].CreatedAt,
+			UpdatedAt:     products[i].UpdatedAt,
+			Name:          products[i].Name,
+			Description:   products[i].Description,
+			Price:         products[i].Price,
+			Link:          products[i].Link,
+			NumberReviews: products[i].NumberReviews,
+			Rating:        products[i].Rating,
+			Embedding:     pgvector.NewVector(vector),
+		})
+	}
+
+	err := service.Repository.AddMultiple(productsWithVectors)
 	return err
 }

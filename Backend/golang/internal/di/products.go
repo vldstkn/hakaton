@@ -5,7 +5,7 @@ import (
 )
 
 type IProductsService interface {
-	AddMultiple(products []domain.Product) error
+	AddMultiple(products []domain.Product, vectors [][]float32) error
 }
 
 type IProductsRepository interface {

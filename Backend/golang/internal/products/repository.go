@@ -19,18 +19,16 @@ func NewRepository(database *db.DB) *Repository {
 }
 
 func (repo *Repository) AddMultiple(products []domain.Product) error {
+	fmt.Sprintln(products)
 	var valueStrings []string
 	var valueArgs []interface{}
-	//FIXME:
-	vector := make([]float64, 312)
-	vecStr := vectorToString(vector)
 
 	for i, product := range products {
 		valueStrings = append(valueStrings, fmt.Sprintf("($%d, $%d, $%d, $%d, $%d, $%d, $%d, $%d)",
 			i*8+1, i*8+2, i*8+3, i*8+4, i*8+5, i*8+6, i*8+7, i*8+8))
 
 		valueArgs = append(valueArgs, product.Price, product.Rating, product.NumberReviews,
-			product.Link, product.CatId, product.Name, product.Description, vecStr)
+			product.Link, product.CatId, product.Name, product.Description, product.Embedding)
 	}
 
 	query := fmt.Sprintf(`
@@ -41,7 +39,7 @@ func (repo *Repository) AddMultiple(products []domain.Product) error {
 	return err
 }
 
-func vectorToString(vector []float64) string {
+func vectorToString(vector []float32) string {
 	var buf bytes.Buffer
 	buf.WriteString("[")
 	for i, v := range vector {
