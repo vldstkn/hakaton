@@ -40,6 +40,11 @@ func NewHandler(router *chi.Mux, deps *HandlerDeps) {
 	router.Route("/products", func(router chi.Router) {
 		router.Post("/add-multiple", handler.AddMultiple())
 		router.Post("/recom", handler.GetRecommendation())
+		router.Post("/user", handler.GetByUserId())
+		router.Post("/favorite", handler.SetFavorite())
+		router.Post("/user", handler.GetByUserId())
+		router.Post("/id", handler.GetById())
+		router.Post("/search", handler.GetBySearch())
 		router.Post("/all", handler.GetAll())
 	})
 }
@@ -161,7 +166,42 @@ func (handler *Handler) GetById() http.HandlerFunc {
 
 func (handler *Handler) GetByUserId() http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
+		body, err := req.HandleBody[GetByUserIdRequest](&w, r)
+		if err != nil {
+			handler.Logger.Error("req.HandleBody", slog.String("err", err.Error()))
+			http.Error(w, http.StatusText(http.StatusBadRequest), http.StatusBadRequest)
+			return
+		}
+		products, err := handler.Service.GetFavoriteByUserId(body.Id)
+		if err != nil {
+			handler.Logger.Error("Service.GetRecom", slog.String("err", err.Error()))
+			http.Error(w, http.StatusText(http.StatusInternalServerError), http.StatusInternalServerError)
+			return
+		}
+		res.Json(w, GetByUserIdResponse{
+			Products: products,
+		}, http.StatusOK)
+	}
+}
 
+func (handler *Handler) SetFavorite() http.HandlerFunc {
+	return func(w http.ResponseWriter, r *http.Request) {
+		body, err := req.HandleBody[SetFavoriteRequest](&w, r)
+		if err != nil {
+			handler.Logger.Error("req.HandleBody", slog.String("err", err.Error()))
+			http.Error(w, http.StatusText(http.StatusBadRequest), http.StatusBadRequest)
+			return
+		}
+		isSuccess, err := handler.Service.SetFavorite(body.UserId, body.ProductId)
+
+		if err != nil {
+			handler.Logger.Error("Service.SetFavorite", slog.String("err", err.Error()))
+			http.Error(w, http.StatusText(http.StatusBadRequest), http.StatusBadRequest)
+			return
+		}
+		res.Json(w, SetFavoriteResponse{
+			IsSuccess: isSuccess,
+		}, http.StatusOK)
 	}
 }
 
@@ -174,6 +214,23 @@ func (handler *Handler) GetAll() http.HandlerFunc {
 			return
 		}
 		res.Json(w, GetAllResponse{
+			Products: products,
+		}, http.StatusOK)
+	}
+}
+
+func (handler *Handler) GetBySearch() http.HandlerFunc {
+	return func(w http.ResponseWriter, r *http.Request) {
+		body, err := req.HandleBody[GetBySearchRequest](&w, r)
+		if err != nil {
+			handler.Logger.Error("req.HandleBody", slog.String("err", err.Error()))
+			http.Error(w, http.StatusText(http.StatusBadRequest), http.StatusBadRequest)
+			return
+		}
+
+		products := handler.Service.GetBySearch(body.Search)
+
+		res.Json(w, GetByUserIdResponse{
 			Products: products,
 		}, http.StatusOK)
 	}

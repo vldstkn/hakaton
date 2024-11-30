@@ -34,3 +34,26 @@ type GetRecomResponse struct {
 type GetAllResponse struct {
 	Products []domain.Product `json:"products"`
 }
+
+type GetByUserIdRequest struct {
+	Id int `json:"id"`
+}
+
+type GetByUserIdResponse struct {
+	Products []domain.Product `json:"products"`
+}
+
+type SetFavoriteRequest struct {
+	UserId    int `json:"user_id"`
+	ProductId int `json:"product_id"`
+}
+
+type SetFavoriteResponse struct {
+	IsSuccess bool `json:"is_success"`
+}
+type GetBySearchRequest struct {
+	Search string `json:"search"`
+}
+type GetBySearchResponse struct {
+	Products []domain.Product `json:"products"`
+}
