@@ -1,7 +1,8 @@
-import { Card, CardContent, Rating, Button } from '@mui/material';
+import { Card, CardContent, Rating, Button, Checkbox, Box } from '@mui/material';
 import { NavLink } from 'react-router-dom';
 import './FavoritesPage.css'
 import { useState } from 'react';
+import { Favorite, FavoriteBorder } from '@mui/icons-material';
 
 export default function FavoritesPage() {
     const [rec1, set1] = useState(true)
@@ -25,9 +26,33 @@ export default function FavoritesPage() {
           <div className='list'>
             {products.map((product) => 
             <Card className='product' key={product.productId}> 
-              <NavLink to={`/product/${product.productId}`}>
               <CardContent className="cardContent">
+              <NavLink to={`/product/${product.productId}`}>
+              <Box sx={{ position: 'relative'}}>
               <img className='img_product' src={`/product_${product.productId}.jpg`} />  
+              <Checkbox
+                icon={<Favorite />}
+                checkedIcon={<FavoriteBorder />}
+                onClick={(event) => event.stopPropagation()} 
+                sx={{
+                  position: 'absolute',
+                  backgroundColor: 'white',
+                  top: '10px',
+                  right: '10px',
+                  color: 'red', 
+                  '&.Mui-checked': {
+                    color: 'gray', 
+                  },
+                  '&:hover': {
+                    backgroundColor: 'white', 
+                    opacity: 1,
+                    transform: 'scale(1.2)', 
+                  },
+                  transition: 'transform 1.3s', 
+                  zIndex: 1,
+                }}
+              />
+              </Box>
               <h2><span className='price'>{product.price} </span> <img className='logo' src="/public/wblogo.jpg" alt="" /> </h2>    
               <h2 className='product_name'>{product.productName}</h2>
               <div className='rating-read'>
@@ -39,9 +64,10 @@ export default function FavoritesPage() {
             variant="contained"
             >
             Доставим {product.date}
-      </Button>
+              </Button>
+              </NavLink> 
              </CardContent>
-              </NavLink>  
+               
               </Card>
           
           )}

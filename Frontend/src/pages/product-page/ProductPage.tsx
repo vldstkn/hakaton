@@ -3,7 +3,6 @@ import './productPage.css'
 import { Button, Paper, Rating } from '@mui/material';
 import CreditCardIcon from '@mui/icons-material/CreditCard';
 import FavoriteIcon from '@mui/icons-material/Favorite';
-import StarIcon from '@mui/icons-material/Stars';
 import { Star } from '@mui/icons-material';
 export default function ProductPage() {
     //Получение идентификатора товара из url
