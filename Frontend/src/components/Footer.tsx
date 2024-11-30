@@ -16,8 +16,11 @@ function Footer() {
         </div>
        </div>   
        <div className='gridItem'>
+        Это Проект команды MFS специально для Cookie Fest на площадке  Школа 21. Мы помогаем конечному пользователю находить самые выгодные предложения.
+       </div>
+       <div className='gridItem'>
         В разработке участвовали:
-        <ul>
+        <ul className="name-list">
                 <li>Соловьев Вячеслав</li>
                 <li>Сатукин Владислав</li>
                 <li>Бахтин Роман</li>
@@ -27,10 +30,6 @@ function Footer() {
             
         </ul>
        </div>
-       <div className='gridItem'>
-        Это Проект команды MFS специально для Cookie Fest на площадке  Школа 21. Мы помогаем конечному пользователю находить самые выгодные предложения.
-       </div>
-       
        </div>
        <hr/>
        <p id="copyright" className="copyright">

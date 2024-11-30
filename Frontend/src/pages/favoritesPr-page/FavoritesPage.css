@@ -1,6 +1,26 @@
-.head{
+.head {
     text-align: center;
     font-family: YS Text, Helvetica, Arial, sans-serif;
-    font-size: 35px;
-    color:black;
+    font-size: 30px;
+    color: rgb(64,1,64);
+    margin-left: 183.5px;
+    margin-right: 183.5px;
+    position: relative; 
+}
+
+.head::after {
+    content: ""; /* Создаем пустой контент для псевдоэлемента */
+    display: block; /* Делаем его блочным элементом */
+    width: 100%; /* Занимаем всю ширину родителя */
+    height: 0.4px; /* Высота полоски */
+    background-color: rgb(196, 190, 190); /* Цвет полоски */
+    position: absolute; /* Абсолютное позиционирование */
+    left: 0; /* Сдвигаем влево */
+    margin-top: 20px; /* Добавляем отступ сверху для создания расстояния */
+
+}
+.boxfv {
+    padding: 20px 0px;
+    margin-left: 183.5px;
+    margin-right: 183.5px;
 }
