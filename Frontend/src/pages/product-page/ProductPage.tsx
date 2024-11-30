@@ -3,7 +3,8 @@ import './productPage.css'
 import { Button, Paper, Rating } from '@mui/material';
 import CreditCardIcon from '@mui/icons-material/CreditCard';
 import FavoriteIcon from '@mui/icons-material/Favorite';
-import StarBorderIcon from '@mui/icons-material/StarBorder';
+import StarIcon from '@mui/icons-material/Stars';
+import { Star } from '@mui/icons-material';
 export default function ProductPage() {
     //Получение идентификатора товара из url
     const { id } = useParams();
@@ -33,7 +34,7 @@ export default function ProductPage() {
       <h1 className="prPrice">{elem.price}</h1>
     </div>
     <div className='rating-read'>
-              <StarBorderIcon className="star-icon" />
+              <Star className="star-icon" />
               <h2 className='rating-value' >{elem.stars.toFixed(1)}</h2>
               <h2 className='reviews'>({elem.reviews})</h2>
               </div>
