@@ -6,6 +6,7 @@ import AuthPage from '../pages/auth/AuthPage';
 import NavBar from '../components/NavBar';
 import FavoritesPage from '../pages/favoritesPr-page/FavoritesPage';
 import Footer from '../components/Footer';
+import Profile from '../pages/profile/Profile';
 
 export default function App() {
 
@@ -18,6 +19,7 @@ export default function App() {
         <Route path="product/:id" element={<ProductPage/>} />
         <Route path="auth" element={<AuthPage/>} />
         <Route path="favorites" element={<FavoritesPage/>} />
+        <Route path="profile" element={<Profile/>} />
       </Routes>
     </BrowserRouter>
     <Footer/>
