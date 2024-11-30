@@ -1,4 +1,9 @@
-﻿namespace Gateway.Logic.Interfaces
+﻿using Contracts.Product;
+
+namespace Gateway.Logic.Interfaces
 {
-    public interface IProductProvider { }
+    public interface IProductProvider
+    {
+        public Task<GetAllProductsResponse?> GetAllProductsAsync(CancellationToken cancellationToken);
+    }
 }

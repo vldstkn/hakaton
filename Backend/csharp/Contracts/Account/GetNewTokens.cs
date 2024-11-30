@@ -1,6 +1,8 @@
-﻿namespace Contracts.Account
-{
-    public record GetNewTokensRequest(string RefreshToken);
+﻿using Newtonsoft.Json;
 
-    public record GetNewTokensResponse(string RefreshToken, string AccessToken);
+namespace Contracts.Account
+{
+    public record GetNewTokensRequest([property: JsonProperty("refresh_token")] string RefreshToken);
+
+    public record GetNewTokensResponse([property: JsonProperty("refresh_token")] string RefreshToken, [property: JsonProperty("access_token")] string AccessToken);
 }

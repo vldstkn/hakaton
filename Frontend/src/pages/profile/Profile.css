@@ -1,0 +1,36 @@
+.pageprofile{
+    margin-left: 183.5px;
+    margin-right: 183.5px;
+    height: 50%;
+    padding: 42px;
+    display: flex; /* Используем flexbox для выравнивания */
+    flex-direction: column; /* Выравниваем элементы по вертикали */
+    align-items: flex-start; /* Выравниваем элементы по левому краю */
+
+}
+
+.usname {
+    text-align: left;
+    font-family: YS Text, Helvetica, Arial, sans-serif;
+    font-size: 30px;
+    color: rgb(64,1,64);
+    position: relative; 
+    margin-bottom: 70px;
+}
+
+.order{
+    width: 350px;
+}
+
+.outlog{
+    margin-top: auto;
+    padding: 10px;
+    width: 350px;
+    border-radius: 5px;
+    text-transform: capitalize;
+    background: rgb(255, 80, 101);
+    border: none;
+    color: rgb(64, 1, 64);
+    font-weight: 600;
+    font-size: 18px;
+}

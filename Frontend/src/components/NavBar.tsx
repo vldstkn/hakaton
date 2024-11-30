@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { useState } from 'react';
 import AppBar from '@mui/material/AppBar';
 import './NavBar.css'
 import Box from '@mui/material/Box';
@@ -16,7 +17,7 @@ import { styled } from "@mui/material/styles";
 
 
 const pages = [ 
-  {pageName:'Профиль', IconName: PersonIcon, url: '/auth'},
+  {pageName:'Профиль', IconName: PersonIcon, url: '/profile'},
   {pageName:'Избранное', IconName: FavoriteIcon, url: '/favorites'},
 ]
 
@@ -61,14 +62,16 @@ const Search = styled('div')(({ theme }) => ({
     },
   }));
   
-function ResponsiveAppBar() {
-  const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(null);
-  const [anchorElUser, setAnchorElUser] = React.useState<null | HTMLElement>(null);
-
-
-  const handleCloseNavMenu = () => {
-    setAnchorElNav(null);
-  };
+  function ResponsiveAppBar() {
+    const [isAuthenticated, setIsAuthenticated] = useState(false); // Параметр для проверки авторизации
+  
+    const handleProfileClick = () => {
+      if (isAuthenticated) {
+        window.location.href = '/profile'; // Перенаправление на страницу профиля
+      } else {
+        window.location.href = '/auth'; // Перенаправление на страницу входа
+      }
+    };
 
 
   return (
@@ -108,16 +111,24 @@ function ResponsiveAppBar() {
          
           <Box sx={{ flexGrow: 0, display: 'flex', justifyContent: 'flex-end', alignItems: 'center' }}>
             {pages.map((page) => (
-              <Button className='navbarButton' href={page.url} startIcon={<page.IconName sx={{ fontSize: '24px !important' }}/>} 
-                onClick={handleCloseNavMenu}
-                sx={{ my: 2, color: 'rgb(64, 1, 64)',  fontSize:'14px',    display: 'flex', 
-                  flexDirection: 'column', 
-                  alignItems: 'center' ,
-                  padding: '10px', 
-                  minWidth: '80px', 
-                  height: '60px', 
-              }}
-              > {page.pageName}
+              <Button
+                key={page.pageName}
+                className='navbarButton'
+                startIcon={<page.IconName sx={{ fontSize: '24px !important' }} />}
+                onClick={page.pageName === 'Профиль' ? handleProfileClick : () => window.location.href = page.url}
+                sx={{
+                  my: 2,
+                  color: 'rgb(64, 1, 64)',
+                  fontSize: '14px',
+                  display: 'flex',
+                  flexDirection: 'column',
+                  alignItems: 'center',
+                  padding: '10px',
+                  minWidth: '80px',
+                  height: '60px',
+                }}
+              >
+                {page.pageName}
               </Button>
             ))}
           </Box>
