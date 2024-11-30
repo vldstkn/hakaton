@@ -32,7 +32,7 @@ func (service *Service) Register(email, name, password string) (int, error) {
 	hashedPassword, err := bcrypt.GenerateFromPassword([]byte(password), bcrypt.DefaultCost)
 
 	if err != nil {
-		return -1, errors.New(http.StatusText(http.StatusInternalServerError))
+		return -1, err
 	}
 	user := &domain.User{
 		Email:    email,
@@ -42,7 +42,7 @@ func (service *Service) Register(email, name, password string) (int, error) {
 
 	id, err := service.Repository.Create(user)
 	if err != nil {
-		return -1, errors.New(http.StatusText(http.StatusInternalServerError))
+		return -1, err
 	}
 	return id, nil
 }

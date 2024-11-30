@@ -23,10 +23,6 @@ func NewService(deps *ServiceDeps) *Service {
 func (service *Service) AddMultiple(products []domain.Product, vectors [][]float32) error {
 	var productsWithVectors []domain.Product
 
-	vectors[0] = make([]float32, 312)
-	vectors[1] = make([]float32, 312)
-	vectors[2] = make([]float32, 312)
-
 	for i, vector := range vectors {
 		productsWithVectors = append(productsWithVectors, domain.Product{
 			Id:            products[i].Id,

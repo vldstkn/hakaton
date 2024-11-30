@@ -1,6 +1,8 @@
 package products
 
 import (
+	"bytes"
+	"encoding/json"
 	"fmt"
 	"github.com/go-chi/chi/v5"
 	configs "hakaton/internal/config"
@@ -13,28 +15,28 @@ import (
 )
 
 type Handler struct {
-	Db       *db.DB
-	Config   *configs.Config
-	Logger   *slog.Logger
-	Service  di.IProductsService
-	MLClient *http.Client
+	Db             *db.DB
+	Config         *configs.Config
+	Logger         *slog.Logger
+	Service        di.IProductsService
+	ProductsClient *http.Client
 }
 
 type HandlerDeps struct {
-	Db       *db.DB
-	Config   *configs.Config
-	Logger   *slog.Logger
-	Service  di.IProductsService
-	MLClient *http.Client
+	Db             *db.DB
+	Config         *configs.Config
+	Logger         *slog.Logger
+	Service        di.IProductsService
+	ProductsClient *http.Client
 }
 
 func NewHandler(router *chi.Mux, deps *HandlerDeps) {
 	handler := &Handler{
-		Db:       deps.Db,
-		Logger:   deps.Logger,
-		Config:   deps.Config,
-		Service:  deps.Service,
-		MLClient: deps.MLClient,
+		Db:             deps.Db,
+		Logger:         deps.Logger,
+		Config:         deps.Config,
+		Service:        deps.Service,
+		ProductsClient: deps.ProductsClient,
 	}
 	router.Route("/products", func(router chi.Router) {
 		router.Post("/add-multiple", handler.AddMultiple())
@@ -49,38 +51,43 @@ func (handler *Handler) AddMultiple() http.HandlerFunc {
 			http.Error(w, http.StatusText(http.StatusBadRequest), http.StatusBadRequest)
 			return
 		}
-		fmt.Println(r.Body)
 
-		//req, err := http.NewRequest("GET", "http://10.199.181.103:8000/rec",http.)
+		data, err := json.Marshal(GetVectorsRequest{
+			Products: body.Products,
+		})
 
 		if err != nil {
-			handler.Logger.Error("AddMultiple HandleBody", slog.String("err", err.Error()))
-			http.Error(w, http.StatusText(http.StatusBadRequest), http.StatusBadRequest)
+			fmt.Printf("Ошибка при сериализации JSON: %v\n", err)
 			return
 		}
 
-		//resp, err := handler.MLClient.Do(req)
-		if err != nil {
-			fmt.Println("Ошибка выполнения запроса:", err)
-			return
-		}
-		//defer resp.Body.Close() // Закрываем тело ответа в конце
-
-		// Читаем тело ответа
-		//bodyML, err := io.ReadAll(resp.Body)
-
-		//fmt.Println("bodyML11", bodyML)
+		request, err := http.NewRequest("GET", "http://"+handler.Config.MLAddress+"/rec", bytes.NewBuffer(data))
 
 		if err != nil {
-			handler.Logger.Error("AddMultiple HandleBody", slog.String("err", err.Error()))
-			http.Error(w, http.StatusText(http.StatusBadRequest), http.StatusBadRequest)
+			fmt.Printf("Ошибка при создании HTTP-запроса: %v\n", err)
 			return
 		}
 
-		return
+		r.Header.Set("Content-Type", "application/json")
 
-		vectors := make([][]float32, 3)
-		if len(vectors) != len(body.Products) {
+		resp, err := handler.ProductsClient.Do(request)
+
+		if err != nil {
+			fmt.Printf("Ошибка при выполнении HTTP-запроса: %v\n", err)
+			return
+		}
+		defer resp.Body.Close()
+
+		var bodyVectors GetVectorsResponse
+
+		err = json.NewDecoder(resp.Body).Decode(&bodyVectors)
+
+		if err != nil {
+			fmt.Printf("Ошибка при выполнении преобразовании ответа: %v\n", err)
+			return
+		}
+
+		if len(bodyVectors.Vectors) != len(body.Products) {
 			handler.Logger.Error("AddMultiple error len", slog.String("err", "vector and products have different lengths"))
 			res.Json(w, AddMultiplyResponse{
 				IsSuccess: false,
@@ -88,7 +95,7 @@ func (handler *Handler) AddMultiple() http.HandlerFunc {
 			}, http.StatusBadRequest)
 			return
 		}
-		err = handler.Service.AddMultiple(body.Products, vectors)
+		err = handler.Service.AddMultiple(body.Products, bodyVectors.Vectors)
 		if err != nil {
 			handler.Logger.Error("AddMultiple Service.AddMultiple", slog.String("err", err.Error()))
 			res.Json(w, AddMultiplyResponse{

@@ -9,6 +9,7 @@ type Config struct {
 	ApiAddress      string
 	AccountAddress  string
 	ProductsAddress string
+	MLAddress       string
 	Dsn             string
 	JWTSecret       string
 }

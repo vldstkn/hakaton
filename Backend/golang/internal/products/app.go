@@ -10,10 +10,10 @@ import (
 )
 
 type App struct {
-	DB       *db.DB
-	Config   *configs.Config
-	Logger   *slog.Logger
-	MLClient *http.Client
+	DB             *db.DB
+	Config         *configs.Config
+	Logger         *slog.Logger
+	ProductsClient *http.Client
 }
 
 type AppDeps struct {
@@ -27,7 +27,7 @@ func NewApp(deps AppDeps) *App {
 		DB:     deps.DB,
 		Config: deps.Config,
 		Logger: deps.Logger,
-		MLClient: &http.Client{
+		ProductsClient: &http.Client{
 			Timeout: 10 * time.Second,
 		},
 	}
@@ -40,10 +40,10 @@ func (app *App) Run() *chi.Mux {
 		Repository: repository,
 	})
 	NewHandler(router, &HandlerDeps{
-		Service:  service,
-		Config:   app.Config,
-		Logger:   app.Logger,
-		MLClient: app.MLClient,
+		Service:        service,
+		Config:         app.Config,
+		Logger:         app.Logger,
+		ProductsClient: app.ProductsClient,
 	})
 
 	return router
