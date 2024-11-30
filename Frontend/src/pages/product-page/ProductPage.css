@@ -22,14 +22,9 @@
     margin-top: 20px;
 }
 
-.price{
-    margin-bottom: 10px;
-    color:rgb(255, 80, 101);
-    font-size: 25px;
-
-}
-.price:after {
-    content: '\20BD'
+.prPrice{
+    height: 30;
+    margin-top: auto; 
 }
 .buttonContainer {
     margin-top: auto;

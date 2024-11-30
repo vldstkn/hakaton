@@ -31,7 +31,7 @@ export default function ProductPage() {
     <h1 className='product_name'>{elem.productName}</h1>
       <div className="prAbout"> <h3>Описание товара</h3></div>  
       <div className="prPriceButton">
-      <div className="price"><h3>{elem.price}</h3></div>
+      <div className="prPrice"><h3>{elem.price}</h3></div>
       <div className="buttonContainer">
         <Button className="buttonbuy"
             variant="contained"
