@@ -1,6 +1,6 @@
 .productPage {
     display: flex; 
-    height: 100vh; 
+    height: 800px; 
     width: 100%; 
 }
 
@@ -22,9 +22,14 @@
     margin-top: 20px;
 }
 
-.prPrice{
-    height: 30;
-    margin-top: auto; 
+.price{
+    margin-bottom: 10px;
+    color:rgb(255, 80, 101);
+    font-size: 25px;
+
+}
+.price:after {
+    content: '\20BD'
 }
 .buttonContainer {
     margin-top: auto;
