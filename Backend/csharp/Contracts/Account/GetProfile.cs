@@ -1,6 +1,6 @@
 ﻿namespace Contracts.Account
 {
-    public record GetProfileRequest(int UserId);
+    public record GetProfileRequest(int Id);
 
-    public record GetProfileResponse(int Id, string AccessToken, string RefreshToken);
+    public record GetProfileResponse(int Id, string Email, string Name);
 }

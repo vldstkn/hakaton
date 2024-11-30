@@ -1,8 +1,11 @@
-﻿using System.Net.Http.Json;
-using System.Text.Json;
-using Contracts.Account;
+﻿using Contracts.Account;
 using Gateway.Logic.Interfaces;
 using Microsoft.Extensions.Options;
+using Newtonsoft.Json;
+using System.Net.Http.Json;
+using System.Net.Mime;
+using System.Text;
+using System.Text.Json;
 
 namespace Gateway.Logic
 {
@@ -18,11 +21,17 @@ namespace Gateway.Logic
         {
             using var client = httpClientFactory.CreateClient();
 
-            var data = await client.GetFromJsonAsync<RegisterResponse>(
-                $"{servicesUrl.Value.AccountUrl}/auth/register?email={request.Email}&password{request.Password}&name{request.Name}",
+            var response = await client.PostAsJsonAsync(
+                $"{servicesUrl.Value.AccountUrl}/auth/register",
+                request,
                 new JsonSerializerOptions(JsonSerializerDefaults.Web),
                 cancellationToken
-            );
+            ).ConfigureAwait(false);
+
+            response.EnsureSuccessStatusCode();
+
+            var responseBody = await response.Content.ReadAsStringAsync(cancellationToken).ConfigureAwait(false);
+            var data = JsonConvert.DeserializeObject<RegisterResponse>(responseBody);
 
             return data;
         }
@@ -34,11 +43,17 @@ namespace Gateway.Logic
         {
             using var client = httpClientFactory.CreateClient();
 
-            var data = await client.GetFromJsonAsync<LoginResponse>(
-                $"{servicesUrl.Value.AccountUrl}/auth/register?email={request.Email}&password{request.Password}",
+            var response = await client.PostAsJsonAsync(
+                $"{servicesUrl.Value.AccountUrl}/auth/login",
+                request,
                 new JsonSerializerOptions(JsonSerializerDefaults.Web),
                 cancellationToken
-            );
+            ).ConfigureAwait(false);
+
+            response.EnsureSuccessStatusCode();
+
+            var responseBody = await response.Content.ReadAsStringAsync(cancellationToken).ConfigureAwait(false);
+            var data = JsonConvert.DeserializeObject<LoginResponse>(responseBody);
 
             return data;
         }
@@ -50,11 +65,23 @@ namespace Gateway.Logic
         {
             using var client = httpClientFactory.CreateClient();
 
-            var data = await client.GetFromJsonAsync<GetNewTokensResponse>(
-                $"{servicesUrl.Value.AccountUrl}auth/register?refresh_token={request.RefreshToken}",
-                new JsonSerializerOptions(JsonSerializerDefaults.Web),
-                cancellationToken
-            );
+            var message = new HttpRequestMessage
+            {
+                Method = HttpMethod.Get,
+                RequestUri = new Uri($"{servicesUrl.Value.AccountUrl}/auth/login/access-token"),
+                Content = new StringContent(
+                JsonConvert.SerializeObject(request),
+                Encoding.UTF8,
+                MediaTypeNames.Application.Json),
+            };
+
+            var response = await client.SendAsync(message, cancellationToken)
+                .ConfigureAwait(false);
+
+            response.EnsureSuccessStatusCode();
+
+            var responseBody = await response.Content.ReadAsStringAsync(cancellationToken).ConfigureAwait(false);
+            var data = JsonConvert.DeserializeObject<GetNewTokensResponse>(responseBody);
 
             return data;
         }
@@ -66,11 +93,23 @@ namespace Gateway.Logic
         {
             using var client = httpClientFactory.CreateClient();
 
-            var data = await client.GetFromJsonAsync<GetProfileResponse>(
-                $"{servicesUrl.Value.AccountUrl}/account/profile?id={request.UserId}",
-                new JsonSerializerOptions(JsonSerializerDefaults.Web),
-                cancellationToken
-            );
+            var message = new HttpRequestMessage
+            {
+                Method = HttpMethod.Get,
+                RequestUri = new Uri($"{servicesUrl.Value.AccountUrl}/account/profile"),
+                Content = new StringContent(
+                JsonConvert.SerializeObject(request),
+                Encoding.UTF8,
+                MediaTypeNames.Application.Json),
+            };
+
+            var response = await client.SendAsync(message, cancellationToken)
+                .ConfigureAwait(false);
+
+            response.EnsureSuccessStatusCode();
+
+            var responseBody = await response.Content.ReadAsStringAsync(cancellationToken).ConfigureAwait(false);
+            var data = JsonConvert.DeserializeObject<GetProfileResponse>(responseBody);
 
             return data;
         }

@@ -8,7 +8,7 @@ namespace Gateway.API.Controllers
     [Route("api/gateway/account")]
     public class AccountController(IAccountProvider accountProvider) : ControllerBase
     {
-        [HttpGet("register")]
+        [HttpPost("register")]
         public async Task<ActionResult<RegisterResponse>> Register(
             [FromQuery] string email,
             [FromQuery] string password,
@@ -29,7 +29,7 @@ namespace Gateway.API.Controllers
             return data;
         }
 
-        [HttpGet("login")]
+        [HttpPost("login")]
         public async Task<ActionResult<LoginResponse>> Login(
             [FromQuery] string email,
             [FromQuery] string password,
@@ -70,18 +70,18 @@ namespace Gateway.API.Controllers
 
         [HttpGet("get-profile")]
         public async Task<ActionResult<GetProfileResponse>> GetProfile(
-            [FromQuery] int userId,
+            [FromQuery] int Id,
             CancellationToken cancellationToken
         )
         {
             var data = await accountProvider.GetProfile(
-                new GetProfileRequest(userId),
+                new GetProfileRequest(Id),
                 cancellationToken
             );
 
             if (data == null)
             {
-                return BadRequest("Get new tokens failed");
+                return BadRequest("Get profile failed");
             }
 
             return data;
