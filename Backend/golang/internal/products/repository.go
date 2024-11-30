@@ -69,9 +69,66 @@ func (repo *Repository) GetAll() []domain.Product {
 
 func (repo *Repository) GetById(id int) *domain.Product {
 	var product domain.Product
-	err := repo.DB.Get(&product, "SELECT * FROM products WHERE id=$1", id)
-	if err != nil {
+	err := repo.DB.Get(product, "SELECT * FROM products WHERE id=$1", id)
+	if err == nil {
 		return nil
 	}
 	return &product
+}
+
+func (repo *Repository) GetFavoriteByUserId(id int) []domain.Product {
+	var products []domain.Product
+	err := repo.DB.Select(&products,
+		`SELECT p.id, p.created_at, p.updated_at, p.price, p.rating, p.rating, 
+       						 p.number_reviews, p.link, p.cat_id, p.name, p.description 
+						FROM users u 
+						LEFT JOIN favorite_products fp on u.id = fp.user_id
+						JOIN products p on p.id = fp.product_id
+						WHERE u.id=$1`, id)
+	if err != nil {
+		return []domain.Product{}
+	}
+	return products
+}
+
+func (repo *Repository) AddFavorite(userId, prodId int) (bool, error) {
+	_, err := repo.DB.Exec("INSERT INTO favorite_products (user_id, product_id) VALUES ($1, $2)", userId, prodId)
+	if err != nil {
+		return false, err
+	}
+	return true, nil
+}
+
+func (repo *Repository) RemoveFavorite(userId, prodId int) (bool, error) {
+	_, err := repo.DB.Exec("DELETE FROM favorite_products WHERE user_id=$1 AND product_id=$2", userId, prodId)
+	if err != nil {
+		return false, err
+	}
+	return true, nil
+}
+
+func (repo *Repository) FindFavorite(userId, prodId int) bool {
+	var id int
+	err := repo.DB.Get(&id, "SELECT user_id FROM favorite_products WHERE user_id=$1 AND product_id=$2", userId, prodId)
+	if err != nil {
+		return false
+	}
+	return true
+}
+
+func (repo *Repository) GetBySearch(words []string) []domain.Product {
+	var products []domain.Product
+	wordsSql := strings.Join(words, " | ")
+
+	err := repo.DB.Select(&products,
+		`SELECT p.id, p.created_at, p.updated_at, p.price, p.rating, p.rating,
+       						 p.number_reviews, p.link, p.cat_id, p.name, p.description 
+						FROM products p
+					  WHERE to_tsvector('russian', p.name) @@ to_tsquery('russian', $1)
+					  ORDER BY ts_rank(to_tsvector('russian', p.name), to_tsquery('russian', $1)) DESC`, wordsSql)
+
+	if err != nil {
+		return []domain.Product{}
+	}
+	return products
 }

@@ -5,6 +5,7 @@ import (
 	"github.com/pgvector/pgvector-go"
 	"hakaton/internal/di"
 	"hakaton/internal/domain"
+	"strings"
 )
 
 type Service struct {
@@ -54,5 +55,29 @@ func (service *Service) GetRecom(id, cat_id int) ([]domain.Product, error) {
 
 func (service *Service) GetAll() []domain.Product {
 	products := service.Repository.GetAll()
+	return products
+}
+
+func (service *Service) GetFavoriteByUserId(id int) ([]domain.Product, error) {
+	products := service.Repository.GetFavoriteByUserId(id)
+	return products, nil
+}
+
+func (service *Service) SetFavorite(userId, prodId int) (bool, error) {
+	var isSuccess bool
+	var err error
+	isExist := service.Repository.FindFavorite(userId, prodId)
+	if isExist {
+		isSuccess, err = service.Repository.RemoveFavorite(userId, prodId)
+	} else {
+		isSuccess, err = service.Repository.AddFavorite(userId, prodId)
+	}
+	return isSuccess, err
+}
+
+func (service *Service) GetBySearch(search string) []domain.Product {
+	search = strings.ToLower(search)
+	words := strings.Split(search, " ")
+	products := service.Repository.GetBySearch(words)
 	return products
 }
