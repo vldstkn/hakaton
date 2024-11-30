@@ -21,8 +21,7 @@ export default function FavoritesPage() {
     return (
         <>
         <h1 className='head'>Избранное</h1>
-        <hr></hr>
-        <div className='box' >
+        <div className='boxfv' >
           <div className='list'>
             {products.map((product) => 
             <Card className='product' key={product.productId}> 
@@ -72,10 +71,9 @@ export default function FavoritesPage() {
                
              </CardContent>
               </Card>
-          
-          )}
+            )}
           </div>
-          </div>
+        </div>
         </>
     );
 }

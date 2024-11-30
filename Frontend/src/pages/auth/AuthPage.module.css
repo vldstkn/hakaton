@@ -1,9 +1,9 @@
 .page{
-   height: 90%;
+   height: 70%;
    position:relative;
    display: flex;
    flex-direction: column;
-   padding: 24px;
+   padding: 30px;
    margin-left: 183.5px;
    margin-right: 183.5px;
 }

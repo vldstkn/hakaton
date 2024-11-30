@@ -1,28 +1,32 @@
 .productPage {
     display: flex; 
-    height: 800px; 
-    width: 100%; 
+    justify-content: center; 
+    align-items: flex-start; 
+    margin-left: 183.5px;
+    margin-right: 183.5px;
+    gap: 20px; 
 }
 
 .carousel, .productCard {
-    flex: 0 0 50%; /* Каждому элементу отдаем 50% ширины */
     height: 700px; 
     display: flex;
+    flex: 1; 
     margin-top: 50px;
+    margin-bottom: 50px;
+    max-width: 100%; 
+    box-sizing: border-box; 
 }
-
 
 .productCard {
     display: flex; 
     flex-direction: column; 
 }
-.title_name {
-    display: flex; /* Используем flexbox для размещения элементов в строку */
-    align-items: center; /* Центрируем элементы по вертикали */
-    gap: 40px;
-    height: 40px;
-    font-size: large !important;
-    margin: 0%;
+.product_name {
+    font-weight: bold; 
+    overflow-wrap: break-word; 
+    word-wrap: break-word; 
+    white-space: normal; 
+
 }
 .prAbout {
     margin-bottom: auto; 
@@ -91,6 +95,11 @@
 .description{
     padding-left: 0%;
     color: darkgray;
+    font-size: 16px; 
+    overflow-wrap: break-word; 
+    word-wrap: break-word; 
+    white-space: normal;
+
 }
 
 .about{

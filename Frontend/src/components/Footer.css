@@ -10,7 +10,6 @@
     bottom:0px;
 }
 
-
 .container {
     display: flex;
     flex-direction: column;
@@ -21,28 +20,30 @@
     font-size: small;
     font-family: monospace, monospace; 
     display:grid;
-    grid-template-columns: 370px 500px 600px;
-    grid-template-rows: 150px;
-    gap: 5px;
+    grid-template-columns: repeat(3, 1fr); 
+    grid-template-rows: auto; 
+    gap: 20px; 
+    padding: 20px; 
+
 }
 .gridItem {
-    
+    display: flex; 
+    flex-direction: column; 
+    justify-content: center; 
     box-sizing: border-box;
     text-align:left;
     font-size: 1.1em;
     padding: 1.5em;
     color: darkgray;
-    justify-content: left;
-    border-right:black;
 }
 .gridItem3 {
     font-size: 1.1em;
     box-sizing: border-box;
-    text-align:left;
-    padding-left: 20%;
+    text-align:center;
     color: black;
     justify-content: left;
     border-right:black;
+    padding: 1.5em;
 }
 a {
     outline: none;
@@ -55,10 +56,6 @@ a {
 a:link {
     color: black;
   }
-  
-a:visited {
-    color: black;
-}
   
 a:active {
     color: black;
@@ -85,4 +82,14 @@ button{
 .imgF{
     width: 40px;
     height: 40px;
+}
+
+.name-list {
+    display: grid; 
+    grid-template-columns: repeat(2, 1fr); 
+    padding-left: 20px; 
+}
+
+.name-list li {
+    margin-bottom: 10px; /* Отступ между элементами списка */
 }

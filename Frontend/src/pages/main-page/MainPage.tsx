@@ -13,7 +13,6 @@ export default function MainPage() {
     {productId: 1, productName: 'РуФон 16 Про Макс', stars: 5.0, price: `16500`,reviews: '12', date: '12 Декабря' ,description: 'Функциональный аэрогриль КТ-2250 может использоваться как аэрогриль, аэрофритюрница, а также как духовка. Позволяет готовить несколько блюд одновременно с', src:'https://www.wildberries.ru/catalog/260849114/detail.aspx' },
     {productId: 2, productName: 'Кепка ободранная', stars: 4.6, price: '900',reviews: '12',date: '12 Декабря',description: 'Функциональный аэрогриль КТ-2250 может использоваться как аэрогриль, аэрофритюрница, а также как духовка. Позволяет готовить несколько блюд одновременно с', src:'https://www.wildberries.ru/catalog/260849114/detail.aspx' },
     {productId: 3, productName: 'Кончилось', stars: 2.0, price: '4444',reviews: '12',date: '12 Декабря',description: 'Функциональный аэрогриль КТ-2250 может использоваться как аэрогриль, аэрофритюрница, а также как духовка. Позволяет готовить несколько блюд одновременно с', src:'https://www.wildberries.ru/catalog/260849114/detail.aspx' },
-
   ]
   const productsrand = [
     {productId: 4, productName: 'name 4', stars: 2, price: '1234',reviews: '12',date: '12 Декабря',description: 'Функциональный аэрогриль КТ-2250 может использоваться как аэрогриль, аэрофритюрница, а также как духовка. Позволяет готовить несколько блюд одновременно с', src:'https://www.wildberries.ru/catalog/260849114/detail.aspx' },
