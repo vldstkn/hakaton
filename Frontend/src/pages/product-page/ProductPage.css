@@ -20,6 +20,7 @@
     display: flex; /* Используем flexbox для размещения элементов в строку */
     align-items: center; /* Центрируем элементы по вертикали */
     gap: 40px;
+    height: 40px;
     font-size: large !important;
     margin: 0%;
 }
