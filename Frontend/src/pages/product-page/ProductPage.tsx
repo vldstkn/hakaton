@@ -1,9 +1,9 @@
 import { useParams } from 'react-router-dom';
 import './productPage.css'
-import { Button, Paper } from '@mui/material';
+import { Button, Paper, Rating } from '@mui/material';
 import CreditCardIcon from '@mui/icons-material/CreditCard';
 import FavoriteIcon from '@mui/icons-material/Favorite';
-
+import StarBorderIcon from '@mui/icons-material/StarBorder';
 export default function ProductPage() {
     //Получение идентификатора товара из url
     const { id } = useParams();
@@ -28,10 +28,17 @@ export default function ProductPage() {
             />
       </div>
     <div className="productCard">
-    <h1 className='product_name'>{elem.productName}</h1>
+    <div className="title_name">
+      <h1 className='product_name'>{elem.productName}</h1>
+      <h1 className="prPrice">{elem.price}</h1>
+    </div>
+    <div className='rating-read'>
+              <StarBorderIcon className="star-icon" />
+              <h2 className='rating-value' >{elem.stars.toFixed(1)}</h2>
+              <h2 className='reviews'>({elem.reviews})</h2>
+              </div>
       <div className="prAbout"> <h3>Описание товара</h3></div>  
       <div className="prPriceButton">
-      <div className="prPrice"><h3>{elem.price}</h3></div>
       <div className="buttonContainer">
         <Button className="buttonbuy"
             variant="contained"
