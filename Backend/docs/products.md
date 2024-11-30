@@ -46,3 +46,150 @@ url: ***/products/add-multiple***
 	"error": ""
 }
 ```
+## GetRecom
+
+url: ***/products/recom***
+
+Запрос
+
+```
+{
+    "id": 321,
+    "cat_id": 0
+}
+```
+
+Ответ
+
+```
+{
+	"products": [
+		{
+			"id": 221,
+			"created_at": "2024-11-30T16:26:20.225007Z",
+			"updated_at": "2024-11-30T16:26:20.225007Z",
+			"price": 120,
+			"rating": 3.9,
+			"number_reviews": 448,
+			"link": "https://ozone.com/product5",
+			"cat_id": 0,
+			"name": "Шорты модель 5 - долговечные",
+			"description": "Стильные шорты для дома. Изготовлены из дышащей ткани. Идеальны для активного образа жизни.",
+			"embedding": null
+		},
+		...,
+	]
+}
+```
+
+## SetFavorite
+
+url: ***/products/favorite***
+
+Запрос
+
+```
+{
+	"user_id": 1,
+	"product_id": 119
+}
+```
+
+Ответ
+
+```
+{
+	"is_success": true
+}
+```
+## GetByUserId
+
+url: ***/products/user***
+
+Запрос
+
+```
+{
+	"id": 1
+}
+```
+
+Ответ
+
+```
+{
+	"products": [
+		{
+			"id": 117,
+			"created_at": "2024-11-30T15:55:44.727198Z",
+			"updated_at": "2024-11-30T15:55:44.727198Z",
+			"price": 135,
+			"rating": 3.2,
+			"number_reviews": 490,
+			"link": "https://ozone.com/product1",
+			"cat_id": 0,
+			"name": "Носки модель 1 - стильные",
+			"description": "Качественные носки для дома. Изготовлены из высококачественного хлопка. Идеальны для подарка.",
+			"embedding": null
+		},
+		... ,
+	]
+}
+```
+
+## GetBySearch
+
+url: ***/products/search***
+
+Запрос 
+
+```
+{
+	"search": "стильные"
+}
+```
+
+Ответ
+
+```
+{
+	"products": [
+		{
+			"id": 117,
+			"created_at": "2024-11-30T15:55:44.727198Z",
+			"updated_at": "2024-11-30T15:55:44.727198Z",
+			"price": 135,
+			"rating": 3.2,
+			"number_reviews": 490,
+		}, 
+		... ,
+	]
+}
+```
+
+## GetAll
+
+url: ***/products/all***
+
+Запрос
+
+*отсутствует
+
+Ответ
+
+```
+{
+	"products": [
+		{
+			"id": 117,
+			"created_at": "2024-11-30T15:55:44.727198Z",
+			"updated_at": "2024-11-30T15:55:44.727198Z",
+			"price": 135,
+			"rating": 3.2,
+			"number_reviews": 490,
+		}, 
+		... ,
+	]
+}
+```
+
