@@ -8,7 +8,7 @@ namespace Contracts.Product
     public record Product(
         int Id,
         int Price,
-        int Rating,
+        double Rating,
         string Link,
         string Name,
         string Description,
