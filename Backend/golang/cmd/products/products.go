@@ -13,10 +13,10 @@ import (
 func main() {
 	config := &configs.Config{
 		// host=host.docker.internal
-		Dsn:             "host=localhost port=5445 user=postgres dbname=hakaton password=123456 sslmode=disable",
+		Dsn:             "host=host.docker.internal port=5445 user=postgres dbname=hakaton password=123456 sslmode=disable",
 		AccountAddress:  "0.0.0.0:5051",
-		ProductsAddress: "localhost:5052",
-		MLAddress:       "localhost:5053",
+		ProductsAddress: "0.0.0.0:5052",
+		MLAddress:       "0.0.0.0:5053",
 		JWTSecret:       "dfngsijfgidufdbdfiovdfvdio0mviodvdf",
 	}
 
