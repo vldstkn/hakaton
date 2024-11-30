@@ -25,7 +25,7 @@ export default function MainPage() {
       <>
         <div className='main_button' >
         <ToggleButtonGroup>
-          <ToggleButton id="btn" value="rec" sx={{backgroundColor:rec1? 'rgb(192, 254, 254)':'white'}} onClick={() => {set1(true); set2(false)} }>Мои рекомендации</ToggleButton> 
+          <ToggleButton id="btn" value="rec" sx={{backgroundColor:rec1? 'gb(192, 254, 254)':'white'}} onClick={() => {set1(true); set2(false)} }>Мои рекомендации</ToggleButton> 
           <ToggleButton id="btn" value="new" sx={{backgroundColor:rec2? 'rgb(192, 254, 254)':'white'}} onClick={() => {set1(false); set2(true)}}>Хочу что-то новое</ToggleButton>
         </ToggleButtonGroup> {/* Эти кнопки будут выводится если пользователь авторизован */}
 
