@@ -14,7 +14,7 @@ func main() {
 	config := &configs.Config{
 		Dsn:             "host=host.docker.internal port=5445 user=postgres dbname=hakaton password=123456 sslmode=disable",
 		AccountAddress:  "0.0.0.0:5051",
-		ProductsAddress: "localhost:5052",
+		ProductsAddress: "0.0.0.0:5052",
 		JWTSecret:       "dfngsijfgidufdbdfiovdfvdio0mviodvdf",
 	}
 	database := db.NewDb(config.Dsn)

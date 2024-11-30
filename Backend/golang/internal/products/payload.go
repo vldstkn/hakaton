@@ -21,3 +21,12 @@ type GetVectorsRequest struct {
 type GetVectorsResponse struct {
 	Vectors [][]float32 `json:"vectors"`
 }
+
+type GetRecomRequest struct {
+	Id    int `json:"id"`
+	CatId int `json:"cat_id"`
+}
+
+type GetRecomResponse struct {
+	Products []domain.Product `json:"products"`
+}

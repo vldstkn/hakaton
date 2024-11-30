@@ -3,7 +3,6 @@ package products
 import (
 	"bytes"
 	"encoding/json"
-	"fmt"
 	"github.com/go-chi/chi/v5"
 	configs "hakaton/internal/config"
 	"hakaton/internal/di"
@@ -40,6 +39,7 @@ func NewHandler(router *chi.Mux, deps *HandlerDeps) {
 	}
 	router.Route("/products", func(router chi.Router) {
 		router.Post("/add-multiple", handler.AddMultiple())
+		router.Post("/recom", handler.GetRecommendation())
 	})
 }
 
@@ -47,8 +47,11 @@ func (handler *Handler) AddMultiple() http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
 		body, err := req.HandleBody[AddMultiplyRequest](&w, r)
 		if err != nil {
-			handler.Logger.Error("AddMultiple HandleBody", slog.String("err", err.Error()))
-			http.Error(w, http.StatusText(http.StatusBadRequest), http.StatusBadRequest)
+			handler.Logger.Error("req.HandleBody", slog.String("err", err.Error()))
+			res.Json(w, AddMultiplyResponse{
+				IsSuccess: false,
+				Error:     err.Error(),
+			}, http.StatusInternalServerError)
 			return
 		}
 
@@ -57,14 +60,22 @@ func (handler *Handler) AddMultiple() http.HandlerFunc {
 		})
 
 		if err != nil {
-			fmt.Printf("Ошибка при сериализации JSON: %v\n", err)
+			handler.Logger.Error("json.Marshal", slog.String("err", err.Error()))
+			res.Json(w, AddMultiplyResponse{
+				IsSuccess: false,
+				Error:     err.Error(),
+			}, http.StatusInternalServerError)
 			return
 		}
 
 		request, err := http.NewRequest("GET", "http://"+handler.Config.MLAddress+"/rec", bytes.NewBuffer(data))
 
 		if err != nil {
-			fmt.Printf("Ошибка при создании HTTP-запроса: %v\n", err)
+			handler.Logger.Error("http.NewRequest", slog.String("err", err.Error()))
+			res.Json(w, AddMultiplyResponse{
+				IsSuccess: false,
+				Error:     err.Error(),
+			}, http.StatusInternalServerError)
 			return
 		}
 
@@ -73,7 +84,11 @@ func (handler *Handler) AddMultiple() http.HandlerFunc {
 		resp, err := handler.ProductsClient.Do(request)
 
 		if err != nil {
-			fmt.Printf("Ошибка при выполнении HTTP-запроса: %v\n", err)
+			handler.Logger.Error("handler.ProductsClient.Do", slog.String("err", err.Error()))
+			res.Json(w, AddMultiplyResponse{
+				IsSuccess: false,
+				Error:     err.Error(),
+			}, http.StatusInternalServerError)
 			return
 		}
 		defer resp.Body.Close()
@@ -83,7 +98,11 @@ func (handler *Handler) AddMultiple() http.HandlerFunc {
 		err = json.NewDecoder(resp.Body).Decode(&bodyVectors)
 
 		if err != nil {
-			fmt.Printf("Ошибка при выполнении преобразовании ответа: %v\n", err)
+			handler.Logger.Error("json.NewDecoder", slog.String("err", err.Error()))
+			res.Json(w, AddMultiplyResponse{
+				IsSuccess: false,
+				Error:     err.Error(),
+			}, http.StatusBadRequest)
 			return
 		}
 
@@ -111,15 +130,15 @@ func (handler *Handler) AddMultiple() http.HandlerFunc {
 	}
 }
 
-func (handler *Handler) UpdateMultiple() http.HandlerFunc {
+func (handler *Handler) GetRecommendation() http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
-
-	}
-}
-
-func (handler *Handler) UpdateById() http.HandlerFunc {
-	return func(w http.ResponseWriter, r *http.Request) {
-
+		body, err := req.HandleBody[GetRecomRequest](&w, r)
+		if err != nil {
+			handler.Logger.Error("req.HandleBody", slog.String("err", err.Error()))
+			http.Error(w, http.StatusText(http.StatusBadRequest), http.StatusBadRequest)
+			return
+		}
+		_ = body
 	}
 }
 
@@ -130,12 +149,6 @@ func (handler *Handler) GetById() http.HandlerFunc {
 }
 
 func (handler *Handler) GetByUserId() http.HandlerFunc {
-	return func(w http.ResponseWriter, r *http.Request) {
-
-	}
-}
-
-func (handler *Handler) GetRecommendation() http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
 
 	}
