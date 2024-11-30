@@ -1,0 +1,6 @@
+@Parser.API_HostAddress = http://localhost:5011
+
+GET {{Parser.API_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
