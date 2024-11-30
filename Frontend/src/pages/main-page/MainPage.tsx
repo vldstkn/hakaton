@@ -10,14 +10,14 @@ export default function MainPage() {
   const [rec1, set1] = useState(true)
   const [rec2, set2] = useState(false)
   const productsrec = [
-    {productId: 1, productName: 'РуФон 16 Про Макс', stars: 5.0, price: `16500`,reviews: '12', date: '12 Декабря' },
-    {productId: 2, productName: 'Кепка ободранная', stars: 4.6, price: '900',reviews: '12',date: '12 Декабря' },
-    {productId: 3, productName: 'Кончилось', stars: 2.0, price: '4444',reviews: '12',date: '12 Декабря' },
+    {productId: 1, productName: 'РуФон 16 Про Макс', stars: 5.0, price: `16500`,reviews: '12', date: '12 Декабря' ,description: 'Функциональный аэрогриль КТ-2250 может использоваться как аэрогриль, аэрофритюрница, а также как духовка. Позволяет готовить несколько блюд одновременно с', src:'https://www.wildberries.ru/catalog/260849114/detail.aspx' },
+    {productId: 2, productName: 'Кепка ободранная', stars: 4.6, price: '900',reviews: '12',date: '12 Декабря',description: 'Функциональный аэрогриль КТ-2250 может использоваться как аэрогриль, аэрофритюрница, а также как духовка. Позволяет готовить несколько блюд одновременно с', src:'https://www.wildberries.ru/catalog/260849114/detail.aspx' },
+    {productId: 3, productName: 'Кончилось', stars: 2.0, price: '4444',reviews: '12',date: '12 Декабря',description: 'Функциональный аэрогриль КТ-2250 может использоваться как аэрогриль, аэрофритюрница, а также как духовка. Позволяет готовить несколько блюд одновременно с', src:'https://www.wildberries.ru/catalog/260849114/detail.aspx' },
 
   ]
   const productsrand = [
-    {productId: 4, productName: 'name 4', stars: 2, price: '1234',reviews: '12',date: '12 Декабря' },
-    {productId: 5, productName: 'name 5', stars: 3, price: '9999',reviews: '12',date: '12 Декабря' },
+    {productId: 4, productName: 'name 4', stars: 2, price: '1234',reviews: '12',date: '12 Декабря',description: 'Функциональный аэрогриль КТ-2250 может использоваться как аэрогриль, аэрофритюрница, а также как духовка. Позволяет готовить несколько блюд одновременно с', src:'https://www.wildberries.ru/catalog/260849114/detail.aspx' },
+    {productId: 5, productName: 'name 5', stars: 3, price: '9999',reviews: '12',date: '12 Декабря',description: 'Функциональный аэрогриль КТ-2250 может использоваться как аэрогриль, аэрофритюрница, а также как духовка. Позволяет готовить несколько блюд одновременно с', src:'https://www.wildberries.ru/catalog/260849114/detail.aspx' },
    
   ]
   const products = rec1? productsrec : productsrand;
@@ -34,8 +34,8 @@ export default function MainPage() {
           <div className='list'>
             {products.map((product) => 
             <Card className='product' key={product.productId}> 
-              <NavLink to={`/product/${product.productId}`}>
               <CardContent className="cardContent">
+              <NavLink to={`/product/${product.productId}`}>
               <Box sx={{ position: 'relative'}}>
               <img className='img_product' src={`/product_${product.productId}.jpg`} />              
               <Checkbox
@@ -68,13 +68,15 @@ export default function MainPage() {
               <Rating defaultValue={product.stars} precision={0.1} readOnly/>
               <h2 className='reviews'>({product.reviews})</h2>
               </div>
+              </NavLink>  
               <Button className="buttonbuy"
+              target="_blank"
+              href = {product.src}
               variant="contained"
               endIcon={<ShoppingCartIcon />}>
               Доставим {product.date}
               </Button>
               </CardContent>
-              </NavLink>  
             </Card>         
             )}
           </div>
