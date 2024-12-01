@@ -35,7 +35,6 @@ def word2vec(name: str, description: str):
 # Endpoint для API
 @app.get("/rec")
 async def get_word2vec_endpoint(data: RequestData):
-    print("DATA!", data)
     vectors = []
     for product in data.products:
         vector = word2vec(product.name, product.description)

@@ -32,7 +32,29 @@ export default function FavoritesPage() {
            console.log(err.message); 
         }); 
   }, []);
-     
+  
+  const handleCheckboxChange = (product: IProduct) => {
+    // Отправка данных о товаре в базу данных
+    fetch('http://localhost:5987/api/gateway/product/favorite', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ id: product.id }), // Отправляем только id товара
+    })
+    .then((response) => {
+      if (!response.ok) {
+        throw new Error('Network response was not ok');
+      }
+      return response.json();
+    })
+    .then((data) => {
+      console.log('Success:', data);
+    })
+    .catch((error) => {
+      console.error('Error:', error);
+    });
+  };
     return (
         <>
         <h1 className='head'>Избранное</h1>
@@ -47,7 +69,7 @@ export default function FavoritesPage() {
               <Checkbox
                 icon={<Favorite />}
                 checkedIcon={<FavoriteBorder />}
-                onClick={(event) => event.stopPropagation()} 
+                onChange={() => handleCheckboxChange(product)}
                 sx={{
                   position: 'absolute',
                   backgroundColor: 'white',

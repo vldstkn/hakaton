@@ -1,6 +1,5 @@
 using Contracts.Parser;
 using Microsoft.AspNetCore.Mvc;
-using ParserService.Logic.Entities;
 using ParserService.Logic.Handlers;
 
 namespace ParserService.API.Controllers
@@ -11,11 +10,11 @@ namespace ParserService.API.Controllers
     {
         [HttpGet("get-wildberries-data")]
         public async Task<ActionResult<GetWildberriesDataResponse>> GetWildberriesData(
-            [FromQuery] int id,
+            [FromQuery] int categoryId,
             CancellationToken cancellationToken
         )
         {
-            var data = parser.Parse(new WildberriesParameters(id));
+            var data = await parser.Parse(categoryId, cancellationToken);
 
             return new GetWildberriesDataResponse(data);
         }
