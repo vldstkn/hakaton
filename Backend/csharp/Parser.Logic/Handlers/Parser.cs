@@ -19,10 +19,10 @@ namespace ParserService.Logic.Handlers
         {
             using var client = httpClientFactory.CreateClient();
 
-            var currentCategory = _categories.TryGetValue(60600, out var externalCategory);
+            var currentCategory = _categories.TryGetValue(categoryId, out var externalCategory);
 
             var json = await client.GetStringAsync(
-                string.Format(_defaultRequest, externalCategory, 60600),
+                string.Format(_defaultRequest, externalCategory, categoryId),
                 cancellationToken
             );
 
