@@ -21,7 +21,6 @@ export default function Profile() {
         });
   }, []); */
     return (
-    
     <div className="pageprofile">
     {userinfo.map((user) => 
     <>
