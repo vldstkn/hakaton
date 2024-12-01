@@ -40,6 +40,7 @@ const Search = styled('div')(({ theme }) => ({
       marginLeft: theme.spacing(3),
       width: 'auto',
     },
+    
   }));
   
   const IconWrapper = styled('div')(({ theme }) => ({
@@ -99,7 +100,7 @@ const Search = styled('div')(({ theme }) => ({
           >
             EASYMART
           </Typography>
-            <Search sx={{ flexGrow: 8, color: 'rgb(64, 1, 64)', border: 'solid', borderColor: 'rgb(255, 80, 101)',
+            <Search  sx={{ flexGrow: 8, color: 'rgb(64, 1, 64)', border: 'solid', borderColor: 'rgb(255, 80, 101)',
       borderWidth: '4px',}}>
               <IconWrapper>
                 <SearchIcon />

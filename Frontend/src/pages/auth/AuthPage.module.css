@@ -1,69 +1,69 @@
 .page{
-   height: 70%;
-   position:relative;
-   display: flex;
-   flex-direction: column;
-   padding: 30px;
-   margin-left: 183.5px;
-   margin-right: 183.5px;
-}
-.title{
-    font-family: monospace, monospace;
-    font-size: 40px;
-    color: rgb(64, 1, 64) !important;
-    
-}
-
-
-.form{
+    height: 70%;
+    position:relative;
     display: flex;
-    justify-content: center;
     flex-direction: column;
-    margin-top: 60px;
-    gap: 60px;
-}
-
-.input{
-    padding: 7px 5px;
-    color: rgb(64, 1, 64) !important;
-    border-radius: 5px;
-    outline: none;
-    border: none;
-    font-size: 16px;
-    width: 350px;
-    margin-left: auto;
-}
-
-.input::placeholder{
-    color: rgb(64, 1, 64);
-    font-size: 16px;
-}
-.button{
-    margin-top: 60px;
-    padding: 10px;
-    width: 350px;
-    border-radius: 5px;
-    text-transform: capitalize;
-    background: rgb(255, 80, 101);
-    border: none;
-    color: rgb(64, 1, 64);
-    font-weight: 600;
-    font-size: 18px;
-}
-
-.btn-set-type{
-
-    width: 350px;
-    border-radius: 5px;
-    text-transform: capitalize;
-    background: white;
-    border: none;
-    color: rgb(64, 1, 64);
-    font-weight: 600;
-    font-size: 12px;
-    padding: 10px;
-}
-
-.error{
-    color: rgb(240, 146, 13);
-}
+    padding: 30px;
+    margin-left: 183.5px;
+    margin-right: 183.5px;
+ }
+ .title{
+     font-family: monospace, monospace;
+     font-size: 40px;
+     color: rgb(64, 1, 64) !important;
+     
+ }
+ 
+ 
+ .form{
+     display: flex;
+     justify-content: center;
+     flex-direction: column;
+     margin-top: 60px;
+     gap: 60px;
+ }
+ 
+ .input{
+     padding: 7px 5px;
+     color: rgb(64, 1, 64) !important;
+     border-radius: 5px;
+     outline: none;
+     border: none;
+     font-size: 16px;
+     width: 350px;
+     margin-left: auto;
+ }
+ 
+ .input::placeholder{
+     color: rgb(64, 1, 64);
+     font-size: 16px;
+ }
+ .button{
+     margin-top: 60px;
+     padding: 10px;
+     width: 350px;
+     border-radius: 5px;
+     text-transform: capitalize;
+     background: rgb(255, 80, 101);
+     border: none;
+     color: rgb(64, 1, 64);
+     font-weight: 600;
+     font-size: 18px;
+ }
+ 
+ .btn-set-type{
+ 
+     width: 350px;
+     border-radius: 5px;
+     text-transform: capitalize;
+     background: white;
+     border: none;
+     color: rgb(64, 1, 64);
+     font-weight: 600;
+     font-size: 12px;
+     padding: 10px;
+ }
+ 
+ .error{
+     color: rgb(240, 146, 13);
+ }
