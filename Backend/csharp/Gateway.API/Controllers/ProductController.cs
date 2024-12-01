@@ -21,7 +21,7 @@ namespace Gateway.API.Controllers
         }
 
         [HttpPost("add-multiple")]
-        public async Task<ActionResult<AddMultipleResponse>> AddMultiple([FromBody] AddMultipleRequest request, CancellationToken cancellationToken
+        public async Task<ActionResult<AddMultipleResponse>> AddMultiple([FromForm] AddMultipleRequest request, CancellationToken cancellationToken
             )
         {
             var data = await productProvider.AddMultiple(request, cancellationToken);

@@ -13,6 +13,9 @@ builder.Services.AddTransient<IAccountProvider, AccountProvider>();
 builder.Services.AddTransient<IProductProvider, ProductProvider>();
 builder.Services.AddTransient<IParserProvider, ParserProvider>();
 
+builder.Services.AddControllers(
+options => options.SuppressImplicitRequiredAttributeForNonNullableReferenceTypes = true);
+
 var corsPolicy = "CorsPolicy";
 builder.Services.AddCors(options =>
 {
