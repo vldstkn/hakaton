@@ -17,12 +17,64 @@ namespace Gateway.API.Controllers
                 cancellationToken
             );
 
+            return data;
+        }
+
+        [HttpPost("add-multiple")]
+        public async Task<ActionResult<AddMultipleResponse>> AddMultiple([FromBody] AddMultipleRequest request, CancellationToken cancellationToken
+            )
+        {
+            var data = await productProvider.AddMultiple(request, cancellationToken);
+
             if (data == null)
             {
-                return BadRequest("Registration failed");
+                return BadRequest("Add multiple failed");
             }
 
             return data;
         }
+
+        [HttpGet("get-by-search")]
+        public async Task<ActionResult<GetBySearchResponse>> GetBySearch([FromQuery] string search, CancellationToken cancellationToken
+            )
+        {
+            var data = await productProvider.GetBySearch(new GetBySearchRequest(search), cancellationToken);
+
+            return data;
+        }
+
+        [HttpGet("get-by-user")]
+        public async Task<ActionResult<GetByUserIdResponse>> GetByUser([FromQuery] int userId, CancellationToken cancellationToken
+            )
+        {
+            var data = await productProvider.GetByUserId(new GetByUserIdRequest(userId), cancellationToken);
+
+            return data;
+        }
+
+        [HttpGet("get-recom")]
+        public async Task<ActionResult<GetRecomResponse>> GetRecom([FromQuery] int userId, CancellationToken cancellationToken
+            )
+        {
+            var data = await productProvider.GetRecom(new GetRecomRequest(userId), cancellationToken);
+
+            return data;
+        }
+
+        [HttpPost("set-favorite")]
+        public async Task<ActionResult<SetFavoriteResponse>> SetFavorite([FromQuery] int userId, [FromQuery] int productId, CancellationToken cancellationToken
+            )
+        {
+            var data = await productProvider.SetFavorite(new SetFavoriteRequest(userId, productId), cancellationToken);
+
+            if (data == null)
+            {
+                return BadRequest("Set favorite failed");
+            }
+
+            return data;
+        }
+
+
     }
 }

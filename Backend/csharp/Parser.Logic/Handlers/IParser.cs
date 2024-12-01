@@ -1,9 +1,9 @@
-﻿using ParserService.Logic.Entities;
+﻿using Contracts.Parser;
 
 namespace ParserService.Logic.Handlers
 {
     public interface IParser
     {
-        public IEnumerable<string>? Parse(WildberriesParameters parameters);
+        public Task<List<ProductInternal>> Parse(int categoryId, CancellationToken cancellationToken);
     }
 }
