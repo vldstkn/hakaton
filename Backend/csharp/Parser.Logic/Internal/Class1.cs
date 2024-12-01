@@ -1,3 +1,0 @@
-﻿namespace ParserService.Logic.Internal
-{
-}
