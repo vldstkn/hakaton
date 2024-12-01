@@ -42,7 +42,6 @@ func NewHandler(router *chi.Mux, deps *HandlerDeps) {
 		router.Post("/recom", handler.GetRecommendation())
 		router.Post("/user", handler.GetByUserId())
 		router.Post("/favorite", handler.SetFavorite())
-		router.Post("/user", handler.GetByUserId())
 		router.Post("/id", handler.GetById())
 		router.Post("/search", handler.GetBySearch())
 		router.Post("/all", handler.GetAll())
@@ -160,7 +159,21 @@ func (handler *Handler) GetRecommendation() http.HandlerFunc {
 
 func (handler *Handler) GetById() http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
-
+		body, err := req.HandleBody[GetByIdRequest](&w, r)
+		if err != nil {
+			handler.Logger.Error("req.HandleBody", slog.String("err", err.Error()))
+			http.Error(w, http.StatusText(http.StatusBadRequest), http.StatusBadRequest)
+			return
+		}
+		product, err := handler.Service.GetById(body.Id)
+		if err != nil {
+			handler.Logger.Error("Service.GetByIdy", slog.String("err", http.StatusText(http.StatusBadRequest)))
+			http.Error(w, http.StatusText(http.StatusBadRequest), http.StatusBadRequest)
+			return
+		}
+		res.Json(w, GetByIdResponse{
+			Product: product,
+		}, http.StatusOK)
 	}
 }
 

@@ -56,3 +56,11 @@ type GetBySearchRequest struct {
 type GetBySearchResponse struct {
 	Products []domain.Product `json:"products"`
 }
+
+type GetByIdRequest struct {
+	Id int `json:"id"`
+}
+
+type GetByIdResponse struct {
+	Product domain.Product `json:"product"`
+}

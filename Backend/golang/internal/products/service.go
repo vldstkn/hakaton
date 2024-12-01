@@ -81,3 +81,8 @@ func (service *Service) GetBySearch(search string) []domain.Product {
 	products := service.Repository.GetBySearch(words)
 	return products
 }
+
+func (service *Service) GetById(id int) (domain.Product, error) {
+	product, err := service.Repository.GetById(id)
+	return product, err
+}

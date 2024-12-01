@@ -72,13 +72,16 @@ func (repo *Repository) GetAll() []domain.Product {
 	return products
 }
 
-func (repo *Repository) GetById(id int) *domain.Product {
+func (repo *Repository) GetById(id int) (domain.Product, error) {
 	var product domain.Product
-	err := repo.DB.Get(product, "SELECT * FROM products WHERE id=$1", id)
-	if err == nil {
-		return nil
+	err := repo.DB.Get(&product,
+		`SELECT  p.id, p.created_at, p.updated_at, p.price, p.rating, p.rating,
+        			p.number_reviews, p.link, p.cat_id, p.name, p.description 
+            FROM products p WHERE id=$1`, id)
+	if err != nil {
+		return domain.Product{}, err
 	}
-	return &product
+	return product, nil
 }
 
 func (repo *Repository) GetFavoriteByUserId(id int) []domain.Product {

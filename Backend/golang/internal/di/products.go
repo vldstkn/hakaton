@@ -11,12 +11,13 @@ type IProductsService interface {
 	GetFavoriteByUserId(id int) ([]domain.Product, error)
 	SetFavorite(userId, prodId int) (bool, error)
 	GetBySearch(search string) []domain.Product
+	GetById(id int) (domain.Product, error)
 }
 
 type IProductsRepository interface {
 	AddMultiple(products []domain.Product) error
 	GetRecom(inputProducts []domain.Product) ([]domain.Product, error)
-	GetById(id int) *domain.Product
+	GetById(id int) (domain.Product, error)
 	GetAll() []domain.Product
 	GetFavoriteByUserId(id int) []domain.Product
 	AddFavorite(userId, prodId int) (bool, error)
