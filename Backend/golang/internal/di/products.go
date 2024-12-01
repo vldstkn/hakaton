@@ -6,7 +6,7 @@ import (
 
 type IProductsService interface {
 	AddMultiple(products []domain.Product, vectors [][]float32) error
-	GetRecom(id, catId int) ([]domain.Product, error)
+	GetRecom(userId int) ([]domain.Product, error)
 	GetAll() []domain.Product
 	GetFavoriteByUserId(id int) ([]domain.Product, error)
 	SetFavorite(userId, prodId int) (bool, error)
@@ -15,7 +15,7 @@ type IProductsService interface {
 
 type IProductsRepository interface {
 	AddMultiple(products []domain.Product) error
-	GetRecom(id, catId int) ([]domain.Product, error)
+	GetRecom(inputProducts []domain.Product) ([]domain.Product, error)
 	GetById(id int) *domain.Product
 	GetAll() []domain.Product
 	GetFavoriteByUserId(id int) []domain.Product

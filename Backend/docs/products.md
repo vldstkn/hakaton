@@ -54,8 +54,7 @@ url: ***/products/recom***
 
 ```
 {
-    "id": 321,
-    "cat_id": 0
+    "user_id": 1
 }
 ```
 
@@ -141,7 +140,7 @@ url: ***/products/user***
 
 url: ***/products/search***
 
-Запрос 
+Запрос
 
 ```
 {

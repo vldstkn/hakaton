@@ -145,7 +145,7 @@ func (handler *Handler) GetRecommendation() http.HandlerFunc {
 			return
 		}
 
-		products, err := handler.Service.GetRecom(body.Id, body.CatId)
+		products, err := handler.Service.GetRecom(body.UserId)
 		if err != nil {
 			handler.Logger.Error("Service.GetRecom", slog.String("err", err.Error()))
 			http.Error(w, http.StatusText(http.StatusInternalServerError), http.StatusInternalServerError)

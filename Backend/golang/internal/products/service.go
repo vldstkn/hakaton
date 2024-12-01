@@ -44,12 +44,12 @@ func (service *Service) AddMultiple(products []domain.Product, vectors [][]float
 	return err
 }
 
-func (service *Service) GetRecom(id, cat_id int) ([]domain.Product, error) {
-	product := service.Repository.GetById(id)
-	if product == nil {
-		return []domain.Product{}, errors.New("product not exists")
+func (service *Service) GetRecom(userId int) ([]domain.Product, error) {
+	products := service.Repository.GetFavoriteByUserId(userId)
+	if products == nil {
+		return []domain.Product{}, errors.New("products not exists")
 	}
-	products, err := service.Repository.GetRecom(id, cat_id)
+	products, err := service.Repository.GetRecom(products)
 	return products, err
 }
 

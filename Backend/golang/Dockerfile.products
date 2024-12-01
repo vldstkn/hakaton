@@ -9,8 +9,8 @@ RUN go mod download
 
 COPY . .
 
-RUN go build -o account cmd/account/account.go
+RUN go build -o products cmd/products/products.go
 
 #EXPOSE 5051
 
-CMD ["./account"]
+CMD ["./products"]

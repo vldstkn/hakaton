@@ -37,10 +37,12 @@ func (repo *Repository) AddMultiple(products []domain.Product) error {
 	return err
 }
 
-func (repo *Repository) GetRecom(id, catId int) ([]domain.Product, error) {
-	var products []domain.Product
-	err := repo.DB.Select(&products,
-		`SELECT p.id, p.created_at, p.updated_at, p.price, p.rating, p.rating, 
+func (repo *Repository) GetRecom(inputProducts []domain.Product) ([]domain.Product, error) {
+	var resProducts []domain.Product
+	for _, inputProduct := range inputProducts {
+		var products []domain.Product
+		err := repo.DB.Select(&products,
+			`SELECT p.id, p.created_at, p.updated_at, p.price, p.rating, p.rating, 
        						 p.number_reviews, p.link, p.cat_id, p.name, p.description
 						FROM products p
 						CROSS JOIN (
@@ -48,13 +50,16 @@ func (repo *Repository) GetRecom(id, catId int) ([]domain.Product, error) {
 						    FROM products
 						    WHERE id = $1
 						) tp
-						WHERE p.id != $1 AND p.cat_id = $2
+						WHERE p.id != $1
 						ORDER BY p.embedding <=> tp.embedding ASC, p.price DESC, p.rating ASC
-						LIMIT 10`, id, catId)
-	if err != nil {
-		return []domain.Product{}, err
+						LIMIT 3`, inputProduct.Id)
+		if err != nil {
+			continue
+		}
+		resProducts = append(resProducts, products...)
+
 	}
-	return products, nil
+	return resProducts, nil
 }
 
 func (repo *Repository) GetAll() []domain.Product {
@@ -84,7 +89,9 @@ func (repo *Repository) GetFavoriteByUserId(id int) []domain.Product {
 						FROM users u 
 						LEFT JOIN favorite_products fp on u.id = fp.user_id
 						JOIN products p on p.id = fp.product_id
-						WHERE u.id=$1`, id)
+						WHERE u.id=$1
+						ORDER BY p.updated_at`, id)
+
 	if err != nil {
 		return []domain.Product{}
 	}

@@ -23,8 +23,7 @@ type GetVectorsResponse struct {
 }
 
 type GetRecomRequest struct {
-	Id    int `json:"id"`
-	CatId int `json:"cat_id"`
+	UserId int `json:"user_id"`
 }
 
 type GetRecomResponse struct {
