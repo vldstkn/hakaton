@@ -5,6 +5,7 @@ import { useState } from 'react';
 import { Favorite, FavoriteBorder, ShoppingCart } from '@mui/icons-material';
 
 export default function FavoritesPage() {
+
     const [rec1, set1] = useState(true)
     const productsrec = [
       {productId: 1, productName: 'РуФон 16 Про Макс', stars: 5.0, price: `16500`,reviews: '12', date: '12 Декабря' ,description: 'Функциональный аэрогриль КТ-2250 может использоваться как аэрогриль, аэрофритюрница, а также как духовка. Позволяет готовить несколько блюд одновременно с', src:'https://www.wildberries.ru/catalog/260849114/detail.aspx' },

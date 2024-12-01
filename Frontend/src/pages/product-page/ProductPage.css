@@ -106,3 +106,7 @@
     font-size: 20px;
     padding-left: 0%;
 }
+
+.loading{
+    justify-content: center; 
+}

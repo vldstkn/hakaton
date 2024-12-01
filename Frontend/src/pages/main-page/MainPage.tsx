@@ -1,32 +1,47 @@
 import { NavLink } from 'react-router-dom';
 import './MainPage.css'
-import { Box, Button, Checkbox } from '@mui/material';
+import { Box, Button, Checkbox, CircularProgress } from '@mui/material';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import { Card, CardContent, Rating, ToggleButton, ToggleButtonGroup } from '@mui/material';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Favorite, FavoriteBorder } from '@mui/icons-material';
 
+interface IProduct{
+  id : number;
+  price: number;
+  name: string;
+  rating: number;
+  numberReviews: number;
+  link: string;
+  updatedAt: string;  
+}
 export default function MainPage() {
   const [rec1, set1] = useState(true)
   const [rec2, set2] = useState(false)
-  const productsrec = [
-    {productId: 1, productName: 'РуФон 16 Про Макс', stars: 5.0, price: `16500`,reviews: '12', date: '12 Декабря' ,description: 'Функциональный аэрогриль КТ-2250 может использоваться как аэрогриль, аэрофритюрница, а также как духовка. Позволяет готовить несколько блюд одновременно с', src:'https://www.wildberries.ru/catalog/260849114/detail.aspx' },
-    {productId: 2, productName: 'Кепка ободранная', stars: 4.6, price: '900',reviews: '12',date: '12 Декабря',description: 'Функциональный аэрогриль КТ-2250 может использоваться как аэрогриль, аэрофритюрница, а также как духовка. Позволяет готовить несколько блюд одновременно с', src:'https://www.wildberries.ru/catalog/260849114/detail.aspx' },
-    {productId: 3, productName: 'Кончилось', stars: 2.0, price: '4444',reviews: '12',date: '12 Декабря',description: 'Функциональный аэрогриль КТ-2250 может использоваться как аэрогриль, аэрофритюрница, а также как духовка. Позволяет готовить несколько блюд одновременно с', src:'https://www.wildberries.ru/catalog/260849114/detail.aspx' },
-    {productId: 4, productName: 'Кончилось', stars: 2.0, price: '4444',reviews: '12',date: '12 Декабря',description: 'Функциональный аэрогриль КТ-2250 может использоваться как аэрогриль, аэрофритюрница, а также как духовка. Позволяет готовить несколько блюд одновременно с', src:'https://www.wildberries.ru/catalog/260849114/detail.aspx' },
-    {productId: 5, productName: 'Кончилось', stars: 2.0, price: '4444',reviews: '12',date: '12 Декабря',description: 'Функциональный аэрогриль КТ-2250 может использоваться как аэрогриль, аэрофритюрница, а также как духовка. Позволяет готовить несколько блюд одновременно с', src:'https://www.wildberries.ru/catalog/260849114/detail.aspx' },
-    {productId: 6, productName: 'Кончилось', stars: 2.0, price: '4444',reviews: '12',date: '12 Декабря',description: 'Функциональный аэрогриль КТ-2250 может использоваться как аэрогриль, аэрофритюрница, а также как духовка. Позволяет готовить несколько блюд одновременно с', src:'https://www.wildberries.ru/catalog/260849114/detail.aspx' },
-    {productId: 7, productName: 'Кончилось', stars: 2.0, price: '4444',reviews: '12',date: '12 Декабря',description: 'Функциональный аэрогриль КТ-2250 может использоваться как аэрогриль, аэрофритюрница, а также как духовка. Позволяет готовить несколько блюд одновременно с', src:'https://www.wildberries.ru/catalog/260849114/detail.aspx' },
-    {productId: 8, productName: 'Кончилось', stars: 2.0, price: '4444',reviews: '12',date: '12 Декабря',description: 'Функциональный аэрогриль КТ-2250 может использоваться как аэрогриль, аэрофритюрница, а также как духовка. Позволяет готовить несколько блюд одновременно с', src:'https://www.wildberries.ru/catalog/260849114/detail.aspx' },
-    {productId: 9, productName: 'Кончилось', stars: 2.0, price: '4444',reviews: '12',date: '12 Декабря',description: 'Функциональный аэрогриль КТ-2250 может использоваться как аэрогриль, аэрофритюрница, а также как духовка. Позволяет готовить несколько блюд одновременно с', src:'https://www.wildberries.ru/catalog/260849114/detail.aspx' },
 
-  ]
+  const [products, setProducts] = useState<IProduct[]>([]);
+
+  useEffect(() => {
+     fetch('http://localhost:5987/api/gateway/product/all')
+        .then((res) => res.json())
+        .then((data) => {
+           console.log(data);
+           setProducts(data.products);
+        })
+        .catch((err) => {
+           console.log(err.message);
+        });
+  }, []);
+
+  if (!products) {
+    return <div className="loading"><CircularProgress /></div>; 
+  }
   const productsrand = [
     {productId: 10, productName: 'name 4', stars: 2, price: '1234',reviews: '12',date: '12 Декабря',description: 'Функциональный аэрогриль КТ-2250 может использоваться как аэрогриль, аэрофритюрница, а также как духовка. Позволяет готовить несколько блюд одновременно с', src:'https://www.wildberries.ru/catalog/260849114/detail.aspx' },
     {productId: 11, productName: 'name 5', stars: 3, price: '9999',reviews: '12',date: '12 Декабря',description: 'Функциональный аэрогриль КТ-2250 может использоваться как аэрогриль, аэрофритюрница, а также как духовка. Позволяет готовить несколько блюд одновременно с', src:'https://www.wildberries.ru/catalog/260849114/detail.aspx' },
    
   ]
-  const products = rec1? productsrec : productsrand;
+  //const products = rec1? productsrec : productsrand;
     return (
       <>
         <div className='main_button' >
@@ -39,11 +54,11 @@ export default function MainPage() {
         <div className='box' >
           <div className='list'>
             {products.map((product) => 
-            <Card className='product' key={product.productId}> 
+            <Card className='product' key={product.id}> 
               <CardContent className="cardContent">
-              <NavLink to={`/product/${product.productId}`}>
+              <NavLink to={`/product/${product.id}`}>
               <Box sx={{ position: 'relative'}}>
-              <img className='img_product' src={`/product_${product.productId}.jpg`} />              
+              <img className='img_product' src={`/product_${product.id}.jpg`} />              
               <Checkbox
                 icon={<FavoriteBorder />}
                 checkedIcon={<Favorite />}
@@ -68,19 +83,19 @@ export default function MainPage() {
               />
               </Box>
               <h2><span className='price'>{product.price} </span> <img className='logo' src="/public/wblogo.jpg" alt="" /> </h2>      
-              <h2 className='product_name'>{product.productName}</h2>
+              <h2 className='product_name'>{product.name}</h2>
               <div className='rating-read'>
-              <h2 className='rating-value' >{product.stars.toFixed(1)}</h2>
-              <Rating defaultValue={product.stars} precision={0.1} readOnly/>
-              <h2 className='reviews'>({product.reviews})</h2>
+              <h2 className='rating-value' >{product.rating.toFixed(1)}</h2>
+              <Rating defaultValue={product.rating} precision={0.1} readOnly/>
+              <h2 className='reviews'>({product.numberReviews})</h2>
               </div>
               </NavLink>  
               <Button className="buttonbuy"
               target="_blank"
-              href = {product.src}
+              href = {product.link}
               variant="contained"
               endIcon={<ShoppingCartIcon />}>
-              Доставим {product.date}
+              Доставим {product.updatedAt}
               </Button>
               </CardContent>
             </Card>         

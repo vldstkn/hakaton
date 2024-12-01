@@ -20,6 +20,19 @@ export default function AuthPage() {
     const navigate = useNavigate(); // Инициализируем useNavigate
 
     const onSubmit: SubmitHandler<AuthForm> = data => {
+        /* const [products, setPosts] = useState([]);
+
+  useEffect(() => {
+     fetch('http://localhost:5987/api/gateway/product/all')
+        .then((res) => res.json())
+        .then((data) => {
+           console.log(data);
+           setPosts(data);
+        })
+        .catch((err) => {
+           console.log(err.message);
+        });
+  }, []); */
         console.log("The data is being sent", data);
         toast.success("Отправлено");
         reset();

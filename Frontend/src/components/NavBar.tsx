@@ -22,6 +22,7 @@ const pages = [
 ]
 
 const Search = styled('div')(({ theme }) => ({
+    
     position: 'relative',
     borderRadius: theme.shape.borderRadius,
     backgroundColor: alpha(theme.palette.common.white, 0.15),
@@ -52,6 +53,7 @@ const Search = styled('div')(({ theme }) => ({
   }));
 
   const StyledInputBase = styled(InputBase)(({ theme }) => ({
+
     color: 'inherit',
     '& .MuiInputBase-input': {
       padding: theme.spacing(1, 1, 1, 0),
@@ -103,6 +105,7 @@ const Search = styled('div')(({ theme }) => ({
                 <SearchIcon />
               </IconWrapper>
               <StyledInputBase
+              
                 placeholder="Search…"
                 inputProps={{ 'aria-label': 'search' }}
              />
