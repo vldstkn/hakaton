@@ -39,4 +39,4 @@ Python:
 - **---**
 
 Postgres:
-- pg-vector - для хранения векторов
+- [pgvector](https://github.com/pgvector/pgvector) - для хранения векторов
